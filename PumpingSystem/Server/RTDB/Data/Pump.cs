@@ -1,25 +1,21 @@
 ﻿using PumpingSystem.Common;
 
-namespace PumpingSystem.Pumping
+namespace PumpingSystem.Server
 {
-    public class Pumping
+    public class Pump
     {
-        private const int NUMBER_OF_TANKS = 2;
+        private EnumPumpStatus _Status;
         private EnumOperationMode _OperationMode;
-        public Pump Pump { get; }
-        public WaterTank[] Tanks { get; }
-        public bool Alterada { get; set; }
+        public bool Alterada { get; set; } 
 
-        public Pumping()
+        public Pump()
         {
-            this.Pump = new Pump();
-            this.Tanks = new WaterTank[NUMBER_OF_TANKS];
-            for (int i = 0; i < NUMBER_OF_TANKS; i++)
-            {
-                this.Tanks[i] = new WaterTank();
-            }
+            _Status = EnumPumpStatus.Off;
             _OperationMode = EnumOperationMode.Automatic;
+            Alterada = false;
         }
+
+        public EnumPumpStatus Status { get => _Status; }
 
         public EnumOperationMode OperationMode
         {
@@ -36,11 +32,15 @@ namespace PumpingSystem.Pumping
 
         public void TurnOnPump()
         {
-            this.Pump.TurnOnPump();
+            _Status = EnumPumpStatus.On;
+            this.Alterada = true;
         }
+
         public void TurnOffPump()
         {
-            this.Pump.TurnOffPump();
+            _Status = EnumPumpStatus.Off;
+            this.Alterada = true;
         }
+
     }
 }

@@ -1,9 +1,8 @@
 ﻿using System;
 using PumpingSystem.Common;
 using PumpingSystem.Messages.Uart;
-using PumpingSystem.Pumping;
 
-namespace PumpingSystem
+namespace PumpingSystem.Server
 {
     public class TreatTelegram103
     {
@@ -15,11 +14,11 @@ namespace PumpingSystem
 
                 if (tel.OperationMode == (int)EnumOperationMode.Automatic)
                 {
-                    Program.RTDB.Pumping.OperationMode = EnumOperationMode.Automatic;
+                    Program.RTDB.Pump.OperationMode = EnumOperationMode.Automatic;
                 }
                 else
                 {
-                    Program.RTDB.Pumping.OperationMode = EnumOperationMode.Manual;
+                    Program.RTDB.Pump.OperationMode = EnumOperationMode.Manual;
                 }
             }
             catch (Exception e)

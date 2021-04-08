@@ -8,27 +8,65 @@ using PumpingSystem.Messages.Uart;
 using PumpingSystem.Common;
 using PumpingSystem.View;
 
-namespace PumpingSystem.Pumping
+namespace PumpingSystem.Server
 {
-    public class InterfaceView
+    public class ViewInterface
     {
-        private System.Timers.Timer _Timer;
-        private IUpdateForm<Form> _View;
+        private System.Timers.Timer _DataPublisherTimer;
+        private System.Timers.Timer _ProcessChartUpdaterTimer;
+        private IUpdatableForm<Form> _View;
 
-        public InterfaceView(IUpdateForm<Form> view)
+        public ViewInterface(IUpdatableForm<Form> view)
         {
             _View = view;
         }
 
-        public void InitializeTimer(int interval)
+        public void InitializeDataPublisherTimer(int interval)
         {
-            _Timer = new System.Timers.Timer(interval);
-            _Timer.Elapsed += OnTimedEvent;
-            _Timer.AutoReset = true;
-            _Timer.Enabled = true;
+            _DataPublisherTimer = new System.Timers.Timer(interval);
+            _DataPublisherTimer.Elapsed += PublishData;
+            _DataPublisherTimer.AutoReset = true;
+            _DataPublisherTimer.Enabled = true;
         }
 
-        private void OnTimedEvent(Object source, ElapsedEventArgs e)
+        public void InitializeProcessChartUpdaterTimer(int interval)
+        {
+            _ProcessChartUpdaterTimer = new System.Timers.Timer(interval);
+            _ProcessChartUpdaterTimer.Elapsed += UpdateProcessChart;
+            _ProcessChartUpdaterTimer.AutoReset = true;
+            _ProcessChartUpdaterTimer.Enabled = true;
+        }
+
+        private void UpdateProcessChart(Object source, ElapsedEventArgs e)
+        {
+            RTDB rtdb = Program.RTDB;
+            Task.Factory.StartNew(() =>
+            {
+                try
+                {
+                    Monitor.TryEnter(rtdb);
+
+                    DataProcessChart data = new DataProcessChart();
+                    for (int i = 0; i < rtdb.Tanks.Length; i++)
+                    {
+                        data.Level[i] = rtdb.Tanks[i].Level;
+                    }
+                    data.OperationMode = (int)rtdb.Pump.OperationMode;
+                    data.PumpStatus = (int)rtdb.Pump.Status;
+
+                    rtdb.ProcessChart.Add(data);
+                }
+                catch (Exception exc)
+                {
+                }
+                finally
+                {
+                    Monitor.Exit(rtdb);
+                }
+            });
+        }
+
+        private void PublishData(Object source, ElapsedEventArgs e)
         {
             Task.Factory.StartNew(() =>
             {
@@ -41,9 +79,9 @@ namespace PumpingSystem.Pumping
                     bool send = false;
 
                     MsgDataWaterTank[] msgsDataWaterTank = new MsgDataWaterTank[2];
-                    for (int i = 0; i < rtdb.Pumping.Tanks.Length; i++)
+                    for (int i = 0; i < rtdb.Tanks.Length; i++)
                     {
-                        WaterTank waterTank = rtdb.Pumping.Tanks[i];
+                        WaterTank waterTank = rtdb.Tanks[i];
                         msgsDataWaterTank[i] = new MsgDataWaterTank(waterTank.Level, waterTank.MinLevel);
                         send |= waterTank.Alterada;
                         waterTank.Alterada = false;
@@ -54,18 +92,18 @@ namespace PumpingSystem.Pumping
                         PublishDataWaterTank(msgsDataWaterTank);
                     }
 
-                    if (rtdb.Pumping.Pump.Alterada)
+                    if (rtdb.Pump.Alterada)
                     {
-                        MsgDataPump msg = new MsgDataPump(rtdb.Pumping.Pump.Status);
+                        MsgDataPump msg = new MsgDataPump(rtdb.Pump.Status);
                         PublishDataPump(msg);
-                        rtdb.Pumping.Pump.Alterada = false;
+                        rtdb.Pump.Alterada = false;
                     }
 
-                    if (rtdb.Pumping.Alterada)
+                    if (rtdb.Pump.Alterada)
                     {
-                        MsgOperationMode msg = new MsgOperationMode(rtdb.Pumping.OperationMode);
+                        MsgOperationMode msg = new MsgOperationMode(rtdb.Pump.OperationMode);
                         PublishOperationMode(msg);
-                        rtdb.Pumping.Alterada = false;
+                        rtdb.Pump.Alterada = false;
                     }
                 }
                 catch (Exception exc)
@@ -104,9 +142,9 @@ namespace PumpingSystem.Pumping
                     Monitor.TryEnter(rtdb);
 
                     if (msg.StatusPump == EnumPumpStatus.On)
-                        Program.RTDB.Pumping.TurnOnPump();
+                        Program.RTDB.Pump.TurnOnPump();
                     else
-                        Program.RTDB.Pumping.TurnOffPump();
+                        Program.RTDB.Pump.TurnOffPump();
 
                     Program.InterfaceUart.SendMessage(new MsgTelegram200((int)msg.StatusPump));
                 }
@@ -130,9 +168,9 @@ namespace PumpingSystem.Pumping
                     Monitor.TryEnter(rtdb);
 
                     if (msg.OperationMode == EnumOperationMode.Automatic)
-                        Program.RTDB.Pumping.OperationMode = EnumOperationMode.Automatic;
+                        Program.RTDB.Pump.OperationMode = EnumOperationMode.Automatic;
                     else
-                        Program.RTDB.Pumping.OperationMode = EnumOperationMode.Manual;
+                        Program.RTDB.Pump.OperationMode = EnumOperationMode.Manual;
 
                     Program.InterfaceUart.SendMessage(new MsgTelegram201((int)msg.OperationMode));
                 }

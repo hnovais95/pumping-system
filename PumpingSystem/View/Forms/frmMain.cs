@@ -11,12 +11,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
-using PumpingSystem.Common;
 using PumpingSystem.Messages.View;
+using PumpingSystem.Common;
+using PumpingSystem.Server;
 
 namespace PumpingSystem.View
 {
-    public partial class frmMain : Form, IUpdateForm<Form>
+    public partial class frmMain : Form, IUpdatableForm<Form>
     {
         private MsgDataWaterTank[] _MsgsDataWaterTank = { new MsgDataWaterTank(), new MsgDataWaterTank() };
         private MsgDataPump _MsgDataPump = new MsgDataPump();

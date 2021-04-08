@@ -1,8 +1,7 @@
 ﻿using System;
 using PumpingSystem.Messages.Uart;
-using PumpingSystem.Pumping;
 
-namespace PumpingSystem
+namespace PumpingSystem.Server
 {
     public class TreatTelegram100
     {
@@ -11,7 +10,7 @@ namespace PumpingSystem
             try
             {
                 MsgTelegram100 tel = (MsgTelegram100)msg;
-                Pump pump = Program.RTDB.Pumping.Pump;
+                Pump pump = Program.RTDB.Pump;
 
                 if (tel.StatusPump != (int)pump.Status)
                 {

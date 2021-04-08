@@ -3,14 +3,15 @@ using System.IO.Ports;
 using System.Reflection;
 using System.ComponentModel;
 using PumpingSystem.Messages.Uart;
+using PumpingSystem.Server;
 
 namespace PumpingSystem.Driver
 {
-    public class DriverUart
+    public class UartDriver
     {
         private SerialPort _SerialPort;
 
-        public DriverUart(SerialPort serialPort)
+        public UartDriver(SerialPort serialPort)
         {
             _SerialPort = serialPort;
             _SerialPort.PortName = "COM1";
@@ -31,11 +32,13 @@ namespace PumpingSystem.Driver
             {
                 SerialPort serialPort = (SerialPort)sender;
                 string dataReceived = serialPort.ReadExisting();
+
                 string[] buffer = dataReceived?.Split(';');
                 if (buffer != null && buffer.Length > 0)
                 {
                     UartTelegram telegram = new UartTelegram(buffer);
                     IMsgUart msg = MsgUartFactory.CreateMsg(telegram.Header.ID);
+
                     PropertyInfo[] propsInfo = msg.GetType().GetProperties();
                     if ((propsInfo != null) && (propsInfo.Length == telegram.Data.Length))
                     {
@@ -85,7 +88,7 @@ namespace PumpingSystem.Driver
                 }
                 else
                 {
-                    throw new Exception("Impossível criar telegrama sem cabeçalho");
+                    throw new Exception("Impossível criar telegrama sem cabeçalho.");
                 }
             }
             catch (Exception exc)

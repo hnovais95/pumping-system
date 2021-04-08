@@ -1,4 +1,4 @@
-﻿namespace PumpingSystem.Pumping
+﻿namespace PumpingSystem.Server
 {
     public class WaterTank
     {

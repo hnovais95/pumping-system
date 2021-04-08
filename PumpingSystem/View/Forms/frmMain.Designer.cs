@@ -33,12 +33,15 @@
             this.grpMenu = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
+            this.btnOperationMode = new PumpingSystem.View.ToggleButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
+            this.btnOnOff = new PumpingSystem.View.CircularButton();
             this.label1 = new System.Windows.Forms.Label();
             this.picPump = new System.Windows.Forms.PictureBox();
             this.picWaterTank2 = new System.Windows.Forms.PictureBox();
             this.join2 = new System.Windows.Forms.Panel();
+            this.btnPumpLed = new PumpingSystem.View.CircularButton();
             this.join1 = new System.Windows.Forms.Panel();
             this.picWaterTank1 = new System.Windows.Forms.PictureBox();
             this.join5 = new System.Windows.Forms.Panel();
@@ -61,9 +64,6 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtMsg = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.btnOperationMode = new PumpingSystem.View.ToggleButton();
-            this.btnOnOff = new PumpingSystem.View.CircularButton();
-            this.btnPumpLed = new PumpingSystem.View.CircularButton();
             ((System.ComponentModel.ISupportInitialize)(this.splMain)).BeginInit();
             this.splMain.Panel1.SuspendLayout();
             this.splMain.Panel2.SuspendLayout();
@@ -90,28 +90,28 @@
             // 
             // splMain.Panel2
             // 
-            this.splMain.Panel2.Controls.Add(this.picPump);
-            this.splMain.Panel2.Controls.Add(this.picWaterTank2);
-            this.splMain.Panel2.Controls.Add(this.join2);
-            this.splMain.Panel2.Controls.Add(this.btnPumpLed);
             this.splMain.Panel2.Controls.Add(this.join1);
-            this.splMain.Panel2.Controls.Add(this.picWaterTank1);
+            this.splMain.Panel2.Controls.Add(this.join2);
+            this.splMain.Panel2.Controls.Add(this.join3);
             this.splMain.Panel2.Controls.Add(this.join5);
-            this.splMain.Panel2.Controls.Add(this.pipe5);
+            this.splMain.Panel2.Controls.Add(this.join6);
+            this.splMain.Panel2.Controls.Add(this.join7);
+            this.splMain.Panel2.Controls.Add(this.join8);
+            this.splMain.Panel2.Controls.Add(this.join9);
+            this.splMain.Panel2.Controls.Add(this.join10);
             this.splMain.Panel2.Controls.Add(this.pipe1);
-            this.splMain.Panel2.Controls.Add(this.txtLevel1);
+            this.splMain.Panel2.Controls.Add(this.pipe2);
             this.splMain.Panel2.Controls.Add(this.pipe3);
             this.splMain.Panel2.Controls.Add(this.pipe4);
-            this.splMain.Panel2.Controls.Add(this.join10);
-            this.splMain.Panel2.Controls.Add(this.txtLevel2);
-            this.splMain.Panel2.Controls.Add(this.join3);
+            this.splMain.Panel2.Controls.Add(this.pipe5);
             this.splMain.Panel2.Controls.Add(this.pipe6);
-            this.splMain.Panel2.Controls.Add(this.join6);
-            this.splMain.Panel2.Controls.Add(this.join8);
-            this.splMain.Panel2.Controls.Add(this.pipe2);
             this.splMain.Panel2.Controls.Add(this.pipe7);
-            this.splMain.Panel2.Controls.Add(this.join9);
-            this.splMain.Panel2.Controls.Add(this.join7);
+            this.splMain.Panel2.Controls.Add(this.txtLevel1);
+            this.splMain.Panel2.Controls.Add(this.txtLevel2);
+            this.splMain.Panel2.Controls.Add(this.picWaterTank1);
+            this.splMain.Panel2.Controls.Add(this.picWaterTank2);
+            this.splMain.Panel2.Controls.Add(this.picPump);
+            this.splMain.Panel2.Controls.Add(this.btnPumpLed);
             this.splMain.Size = new System.Drawing.Size(911, 643);
             this.splMain.SplitterDistance = 353;
             this.splMain.TabIndex = 11;
@@ -148,6 +148,23 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "MANUAL/AUTO:";
             // 
+            // btnOperationMode
+            // 
+            this.btnOperationMode.BorderColor = System.Drawing.Color.LightGray;
+            this.btnOperationMode.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOperationMode.ForeColor = System.Drawing.Color.White;
+            this.btnOperationMode.IsOn = true;
+            this.btnOperationMode.Location = new System.Drawing.Point(168, 34);
+            this.btnOperationMode.Name = "btnOperationMode";
+            this.btnOperationMode.OffColor = System.Drawing.Color.DarkGray;
+            this.btnOperationMode.OffText = "";
+            this.btnOperationMode.OnColor = System.Drawing.Color.Lime;
+            this.btnOperationMode.OnText = "";
+            this.btnOperationMode.Size = new System.Drawing.Size(60, 35);
+            this.btnOperationMode.TabIndex = 6;
+            this.btnOperationMode.TextEnabled = true;
+            this.btnOperationMode.Click += new System.EventHandler(this.btnOperationMode_Click);
+            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
@@ -166,6 +183,18 @@
             this.label3.Size = new System.Drawing.Size(81, 22);
             this.label3.TabIndex = 7;
             this.label3.Text = "ON/OFF:";
+            // 
+            // btnOnOff
+            // 
+            this.btnOnOff.BackgroundImage = global::PumpingSystem.Properties.Resources.button_off;
+            this.btnOnOff.FlatAppearance.BorderSize = 0;
+            this.btnOnOff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOnOff.Location = new System.Drawing.Point(146, 4);
+            this.btnOnOff.Name = "btnOnOff";
+            this.btnOnOff.Size = new System.Drawing.Size(101, 101);
+            this.btnOnOff.TabIndex = 8;
+            this.btnOnOff.UseVisualStyleBackColor = true;
+            this.btnOnOff.Click += new System.EventHandler(this.btnOnOff_Click);
             // 
             // label1
             // 
@@ -207,6 +236,19 @@
             this.join2.Name = "join2";
             this.join2.Size = new System.Drawing.Size(28, 28);
             this.join2.TabIndex = 3;
+            // 
+            // btnPumpLed
+            // 
+            this.btnPumpLed.BackColor = System.Drawing.Color.Silver;
+            this.btnPumpLed.BackgroundImage = global::PumpingSystem.Properties.Resources.led_off;
+            this.btnPumpLed.Enabled = false;
+            this.btnPumpLed.FlatAppearance.BorderSize = 0;
+            this.btnPumpLed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPumpLed.Location = new System.Drawing.Point(492, 202);
+            this.btnPumpLed.Name = "btnPumpLed";
+            this.btnPumpLed.Size = new System.Drawing.Size(35, 35);
+            this.btnPumpLed.TabIndex = 7;
+            this.btnPumpLed.UseVisualStyleBackColor = false;
             // 
             // join1
             // 
@@ -267,7 +309,7 @@
             this.txtLevel1.Location = new System.Drawing.Point(118, 601);
             this.txtLevel1.Name = "txtLevel1";
             this.txtLevel1.ReadOnly = true;
-            this.txtLevel1.Size = new System.Drawing.Size(96, 29);
+            this.txtLevel1.Size = new System.Drawing.Size(96, 34);
             this.txtLevel1.TabIndex = 5;
             this.txtLevel1.Text = "0%";
             this.txtLevel1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -310,7 +352,7 @@
             this.txtLevel2.Location = new System.Drawing.Point(118, 275);
             this.txtLevel2.Name = "txtLevel2";
             this.txtLevel2.ReadOnly = true;
-            this.txtLevel2.Size = new System.Drawing.Size(96, 29);
+            this.txtLevel2.Size = new System.Drawing.Size(96, 34);
             this.txtLevel2.TabIndex = 5;
             this.txtLevel2.Text = "0%";
             this.txtLevel2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -423,7 +465,7 @@
             this.txtMsg.Location = new System.Drawing.Point(0, 12);
             this.txtMsg.Name = "txtMsg";
             this.txtMsg.ReadOnly = true;
-            this.txtMsg.Size = new System.Drawing.Size(911, 23);
+            this.txtMsg.Size = new System.Drawing.Size(911, 27);
             this.txtMsg.TabIndex = 0;
             // 
             // panel5
@@ -435,51 +477,9 @@
             this.panel5.Size = new System.Drawing.Size(914, 31);
             this.panel5.TabIndex = 0;
             // 
-            // btnOperationMode
-            // 
-            this.btnOperationMode.BorderColor = System.Drawing.Color.LightGray;
-            this.btnOperationMode.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOperationMode.ForeColor = System.Drawing.Color.White;
-            this.btnOperationMode.IsOn = true;
-            this.btnOperationMode.Location = new System.Drawing.Point(168, 34);
-            this.btnOperationMode.Name = "btnOperationMode";
-            this.btnOperationMode.OffColor = System.Drawing.Color.DarkGray;
-            this.btnOperationMode.OffText = "";
-            this.btnOperationMode.OnColor = System.Drawing.Color.Lime;
-            this.btnOperationMode.OnText = "";
-            this.btnOperationMode.Size = new System.Drawing.Size(60, 35);
-            this.btnOperationMode.TabIndex = 6;
-            this.btnOperationMode.TextEnabled = true;
-            this.btnOperationMode.Click += new System.EventHandler(this.btnOperationMode_Click);
-            // 
-            // btnOnOff
-            // 
-            this.btnOnOff.BackgroundImage = global::PumpingSystem.Properties.Resources.button_off;
-            this.btnOnOff.FlatAppearance.BorderSize = 0;
-            this.btnOnOff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOnOff.Location = new System.Drawing.Point(146, 4);
-            this.btnOnOff.Name = "btnOnOff";
-            this.btnOnOff.Size = new System.Drawing.Size(101, 101);
-            this.btnOnOff.TabIndex = 8;
-            this.btnOnOff.UseVisualStyleBackColor = true;
-            this.btnOnOff.Click += new System.EventHandler(this.btnOnOff_Click);
-            // 
-            // btnPumpLed
-            // 
-            this.btnPumpLed.BackColor = System.Drawing.Color.Silver;
-            this.btnPumpLed.BackgroundImage = global::PumpingSystem.Properties.Resources.led_off;
-            this.btnPumpLed.Enabled = false;
-            this.btnPumpLed.FlatAppearance.BorderSize = 0;
-            this.btnPumpLed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPumpLed.Location = new System.Drawing.Point(492, 202);
-            this.btnPumpLed.Name = "btnPumpLed";
-            this.btnPumpLed.Size = new System.Drawing.Size(35, 35);
-            this.btnPumpLed.TabIndex = 7;
-            this.btnPumpLed.UseVisualStyleBackColor = false;
-            // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(18F, 37F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(23F, 46F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(917, 726);
             this.Controls.Add(this.panel3);

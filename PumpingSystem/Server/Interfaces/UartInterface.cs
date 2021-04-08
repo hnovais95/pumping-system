@@ -1,12 +1,12 @@
 ﻿using PumpingSystem.Messages.Uart;
 
-namespace PumpingSystem.Pumping
+namespace PumpingSystem.Server
 {
-    public class InterfaceUart
+    public class UartInterface
     {
         private MsgUartHandlers m_Handlers;
 
-        public InterfaceUart()
+        public UartInterface()
         {
             m_Handlers = new MsgUartHandlers();
             m_Handlers.AddHandler(100, new MsgUartHandlers.MsgUartHandler(TreatTelegram100.TreatTelegram));

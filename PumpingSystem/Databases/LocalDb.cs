@@ -24,6 +24,7 @@ namespace PumpingSystem.Databases
                     throw new Exception("Error recording the record in the table.");
             }
         }
+
         public DataTable Query(string sql, int timeout)
         {
             using (SqlConnection conn = new SqlConnection(_ConnectionString))

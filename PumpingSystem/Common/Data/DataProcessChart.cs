@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PumpingSystem.Common
 {
     public class ProcessChart
     {
-        List<DataProcessChart> Data { get; }
+        public List<DataProcessChart> Data { get; }
 
         public ProcessChart()
         {
