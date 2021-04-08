@@ -14,8 +14,8 @@ namespace PumpingSystem.Server
         public static RTDB RTDB;
         public static LocalDb LocalDb;
         public static UartDriver DriverUart;
-        public static UartInterface InterfaceUart;
-        public static ViewInterface InterfaceView;
+        public static UartServices InterfaceUart;
+        public static ViewServices InterfaceView;
 
         /// <summary>
         ///  The main entry point for the application.
@@ -25,14 +25,14 @@ namespace PumpingSystem.Server
         {
             RTDB = new RTDB();
             LocalDb = new LocalDb(ConnectionString);
-            InterfaceUart = new UartInterface();
+            InterfaceUart = new UartServices();
             DriverUart = new UartDriver(new SerialPort());
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
             _View = new frmMain();
-            InterfaceView = new ViewInterface(_View);
+            InterfaceView = new ViewServices(_View);
             InterfaceView.InitializeDataPublisherTimer(2000);
 
             Application.Run((Form)_View);

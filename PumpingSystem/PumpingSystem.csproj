@@ -93,8 +93,8 @@
     <Compile Include="Messages\View\MsgDataWaterTank.cs" />
     <Compile Include="Server\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Server\Interfaces\UartInterface.cs" />
-    <Compile Include="Server\Interfaces\ViewInterface.cs" />
+    <Compile Include="Server\Interfaces\UartServices.cs" />
+    <Compile Include="Server\Interfaces\ViewServices.cs" />
     <Compile Include="Server\RTDB\Data\Pump.cs" />
     <Compile Include="Server\RTDB\Data\WaterTank.cs" />
     <Compile Include="Server\RTDB\RTDB.cs" />

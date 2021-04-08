@@ -10,13 +10,13 @@ using PumpingSystem.View;
 
 namespace PumpingSystem.Server
 {
-    public class ViewInterface
+    public class ViewServices
     {
         private System.Timers.Timer _DataPublisherTimer;
         private System.Timers.Timer _ProcessChartUpdaterTimer;
         private IUpdatableForm<Form> _View;
 
-        public ViewInterface(IUpdatableForm<Form> view)
+        public ViewServices(IUpdatableForm<Form> view)
         {
             _View = view;
         }
