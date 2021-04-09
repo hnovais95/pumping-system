@@ -49,7 +49,7 @@ namespace PumpingSystem.Driver
                             propsInfo[i].SetValue(msg, result);
                         }
 
-                        Program.InterfaceUart.TreatMessage(msg);
+                        Program.UartService.TreatMessage(msg);
                     }
                 }
             }

@@ -8,6 +8,5 @@ namespace PumpingSystem.View
     {
         void UpdateWaterTanks(MsgDataWaterTank[] msgs);
         void UpdatePump(MsgDataPump msg);
-        void UpdateOperationMode(MsgOperationMode msg);
     }
 }

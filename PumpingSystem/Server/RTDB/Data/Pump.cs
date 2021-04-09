@@ -1,18 +1,21 @@
-﻿using PumpingSystem.Common;
+﻿using System;
+using PumpingSystem.Common;
+
 
 namespace PumpingSystem.Server
 {
+    [Serializable]
     public class Pump
     {
         private EnumPumpStatus _Status;
         private EnumOperationMode _OperationMode;
-        public bool Alterada { get; set; } 
+        public bool Changed { get; set; } 
 
         public Pump()
         {
             _Status = EnumPumpStatus.Off;
             _OperationMode = EnumOperationMode.Automatic;
-            Alterada = false;
+            Changed = false;
         }
 
         public EnumPumpStatus Status { get => _Status; }
@@ -26,20 +29,20 @@ namespace PumpingSystem.Server
             set
             {
                 _OperationMode = value;
-                this.Alterada = true;
+                this.Changed = true;
             }
         }
 
         public void TurnOnPump()
         {
             _Status = EnumPumpStatus.On;
-            this.Alterada = true;
+            this.Changed = true;
         }
 
         public void TurnOffPump()
         {
             _Status = EnumPumpStatus.Off;
-            this.Alterada = true;
+            this.Changed = true;
         }
 
     }

@@ -62,18 +62,21 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Data\DataProcessChart.cs" />
+    <Compile Include="Server\Repository\IAuthenticationDao.cs" />
+    <Compile Include="Server\Services\IRepositoryService.cs" />
+    <Compile Include="View\Authentication\Authentication.cs" />
     <Compile Include="Common\Enums\EnumPosWaterTank.cs" />
     <Compile Include="Common\Enums\EnumOperationMode.cs" />
     <Compile Include="Common\Enums\EnumPumpStatus.cs" />
     <Compile Include="Common\Utilities\Utilities.cs" />
-    <Compile Include="Databases\ICommand.cs" />
-    <Compile Include="Databases\IQuery.cs" />
-    <Compile Include="Databases\LocalDb.cs" />
-    <Compile Include="DbPumpingSystemDataSet.Designer.cs">
+    <Compile Include="PumpingSystemDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DbPumpingSystemDataSet.xsd</DependentUpon>
+      <DependentUpon>PumpingSystemDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Server\Repository\Handlers\AuthenticationDao.cs" />
+    <Compile Include="Server\Repository\IProcessChartDao.cs" />
+    <Compile Include="Server\Repository\Handlers\ProcessChartDao.cs" />
     <Compile Include="Driver\UartDriver.cs" />
     <Compile Include="Driver\UartHeader.cs" />
     <Compile Include="Driver\UartTelegram.cs" />
@@ -88,13 +91,13 @@
     <Compile Include="Messages\Uart\Messages\MsgTelegram201.cs" />
     <Compile Include="Messages\Uart\Messages\MsgTelegram200.cs" />
     <Compile Include="Messages\Uart\Messages\MsgTelegram102.cs" />
-    <Compile Include="Messages\View\MsgOperationMode.cs" />
     <Compile Include="Messages\View\MsgDataPump.cs" />
     <Compile Include="Messages\View\MsgDataWaterTank.cs" />
-    <Compile Include="Server\Program.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Server\Interfaces\UartServices.cs" />
-    <Compile Include="Server\Interfaces\ViewServices.cs" />
+    <Compile Include="Server\Services\Handlers\RepositoryService.cs" />
+    <Compile Include="Server\Services\Handlers\UartService.cs" />
+    <Compile Include="Server\Services\Handlers\ViewService.cs" />
     <Compile Include="Server\RTDB\Data\Pump.cs" />
     <Compile Include="Server\RTDB\Data\WaterTank.cs" />
     <Compile Include="Server\RTDB\RTDB.cs" />
@@ -130,17 +133,6 @@
     <EmbeddedResource Include="View\Forms\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="DbPumpingSystemDataSet.xsc">
-      <DependentUpon>DbPumpingSystemDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="DbPumpingSystemDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DbPumpingSystemDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="DbPumpingSystemDataSet.xss">
-      <DependentUpon>DbPumpingSystemDataSet.xsd</DependentUpon>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -167,17 +159,28 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <None Include="PumpingSystemDataSet.xsc">
+      <DependentUpon>PumpingSystemDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="PumpingSystemDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PumpingSystemDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="PumpingSystemDataSet.xss">
+      <DependentUpon>PumpingSystemDataSet.xsd</DependentUpon>
+    </None>
     <None Include="View\Resources\Ico\PumpingSystem.ico" />
     <None Include="View\Resources\Images\button_off.jpg" />
     <None Include="View\Resources\Images\button_on.jpg" />
     <None Include="View\Resources\Images\led_off.png" />
     <None Include="View\Resources\Images\led_on.png" />
-    <Content Include="Databases\DbPumpingSystem.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="Databases\PumpingSystem.mdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Databases\DbPumpingSystem_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>DbPumpingSystem.mdf</DependentUpon>
+    <Content Include="Databases\PumpingSystem_log.ldf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DependentUpon>PumpingSystem.mdf</DependentUpon>
     </Content>
     <Content Include="View\Resources\Images\pump.png" />
     <Content Include="View\Resources\Images\water_tank_level_0.png" />
@@ -192,8 +195,6 @@
     <Content Include="View\Resources\Images\water_tank_level_80.png" />
     <Content Include="View\Resources\Images\water_tank_level_90.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Databases\Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

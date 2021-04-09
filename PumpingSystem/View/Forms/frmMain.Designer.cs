@@ -38,32 +38,33 @@
             this.label3 = new System.Windows.Forms.Label();
             this.btnOnOff = new PumpingSystem.View.CircularButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.picPump = new System.Windows.Forms.PictureBox();
-            this.picWaterTank2 = new System.Windows.Forms.PictureBox();
-            this.join2 = new System.Windows.Forms.Panel();
-            this.btnPumpLed = new PumpingSystem.View.CircularButton();
             this.join1 = new System.Windows.Forms.Panel();
-            this.picWaterTank1 = new System.Windows.Forms.PictureBox();
+            this.join2 = new System.Windows.Forms.Panel();
+            this.join3 = new System.Windows.Forms.Panel();
             this.join5 = new System.Windows.Forms.Panel();
-            this.pipe5 = new System.Windows.Forms.Panel();
+            this.join6 = new System.Windows.Forms.Panel();
+            this.join7 = new System.Windows.Forms.Panel();
+            this.join8 = new System.Windows.Forms.Panel();
+            this.join9 = new System.Windows.Forms.Panel();
+            this.join10 = new System.Windows.Forms.Panel();
             this.pipe1 = new System.Windows.Forms.Panel();
-            this.txtLevel1 = new System.Windows.Forms.TextBox();
+            this.pipe2 = new System.Windows.Forms.Panel();
             this.pipe3 = new System.Windows.Forms.Panel();
             this.pipe4 = new System.Windows.Forms.Panel();
-            this.join10 = new System.Windows.Forms.Panel();
-            this.txtLevel2 = new System.Windows.Forms.TextBox();
-            this.join3 = new System.Windows.Forms.Panel();
+            this.pipe5 = new System.Windows.Forms.Panel();
             this.pipe6 = new System.Windows.Forms.Panel();
-            this.join6 = new System.Windows.Forms.Panel();
-            this.join8 = new System.Windows.Forms.Panel();
-            this.pipe2 = new System.Windows.Forms.Panel();
             this.pipe7 = new System.Windows.Forms.Panel();
-            this.join9 = new System.Windows.Forms.Panel();
-            this.join7 = new System.Windows.Forms.Panel();
+            this.txtLevel1 = new System.Windows.Forms.TextBox();
+            this.txtLevel2 = new System.Windows.Forms.TextBox();
+            this.picWaterTank1 = new System.Windows.Forms.PictureBox();
+            this.picWaterTank2 = new System.Windows.Forms.PictureBox();
+            this.picPump = new System.Windows.Forms.PictureBox();
+            this.btnPumpLed = new PumpingSystem.View.CircularButton();
             this.panel3 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtMsg = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splMain)).BeginInit();
             this.splMain.Panel1.SuspendLayout();
             this.splMain.Panel2.SuspendLayout();
@@ -71,9 +72,9 @@
             this.grpMenu.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picPump)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picWaterTank2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWaterTank1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picWaterTank2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPump)).BeginInit();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             this.SuspendLayout();
@@ -86,6 +87,7 @@
             // 
             // splMain.Panel1
             // 
+            this.splMain.Panel1.Controls.Add(this.button1);
             this.splMain.Panel1.Controls.Add(this.grpMenu);
             // 
             // splMain.Panel2
@@ -208,24 +210,15 @@
             this.label1.Text = "MENU";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // picPump
+            // join1
             // 
-            this.picPump.Image = global::PumpingSystem.Properties.Resources.pump;
-            this.picPump.Location = new System.Drawing.Point(438, 243);
-            this.picPump.Name = "picPump";
-            this.picPump.Size = new System.Drawing.Size(100, 100);
-            this.picPump.TabIndex = 2;
-            this.picPump.TabStop = false;
-            // 
-            // picWaterTank2
-            // 
-            this.picWaterTank2.Image = global::PumpingSystem.Properties.Resources.water_tank_level_0;
-            this.picWaterTank2.InitialImage = null;
-            this.picWaterTank2.Location = new System.Drawing.Point(15, 8);
-            this.picWaterTank2.Name = "picWaterTank2";
-            this.picWaterTank2.Size = new System.Drawing.Size(300, 300);
-            this.picWaterTank2.TabIndex = 1;
-            this.picWaterTank2.TabStop = false;
+            this.join1.BackColor = System.Drawing.Color.BurlyWood;
+            this.join1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.join1.ForeColor = System.Drawing.Color.Black;
+            this.join1.Location = new System.Drawing.Point(282, 542);
+            this.join1.Name = "join1";
+            this.join1.Size = new System.Drawing.Size(10, 28);
+            this.join1.TabIndex = 3;
             // 
             // join2
             // 
@@ -237,38 +230,15 @@
             this.join2.Size = new System.Drawing.Size(28, 28);
             this.join2.TabIndex = 3;
             // 
-            // btnPumpLed
+            // join3
             // 
-            this.btnPumpLed.BackColor = System.Drawing.Color.Silver;
-            this.btnPumpLed.BackgroundImage = global::PumpingSystem.Properties.Resources.led_off;
-            this.btnPumpLed.Enabled = false;
-            this.btnPumpLed.FlatAppearance.BorderSize = 0;
-            this.btnPumpLed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPumpLed.Location = new System.Drawing.Point(492, 202);
-            this.btnPumpLed.Name = "btnPumpLed";
-            this.btnPumpLed.Size = new System.Drawing.Size(35, 35);
-            this.btnPumpLed.TabIndex = 7;
-            this.btnPumpLed.UseVisualStyleBackColor = false;
-            // 
-            // join1
-            // 
-            this.join1.BackColor = System.Drawing.Color.BurlyWood;
-            this.join1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.join1.ForeColor = System.Drawing.Color.Black;
-            this.join1.Location = new System.Drawing.Point(282, 542);
-            this.join1.Name = "join1";
-            this.join1.Size = new System.Drawing.Size(10, 28);
-            this.join1.TabIndex = 3;
-            // 
-            // picWaterTank1
-            // 
-            this.picWaterTank1.Image = global::PumpingSystem.Properties.Resources.water_tank_level_0;
-            this.picWaterTank1.InitialImage = null;
-            this.picWaterTank1.Location = new System.Drawing.Point(15, 334);
-            this.picWaterTank1.Name = "picWaterTank1";
-            this.picWaterTank1.Size = new System.Drawing.Size(300, 300);
-            this.picWaterTank1.TabIndex = 1;
-            this.picWaterTank1.TabStop = false;
+            this.join3.BackColor = System.Drawing.Color.BurlyWood;
+            this.join3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.join3.ForeColor = System.Drawing.Color.Black;
+            this.join3.Location = new System.Drawing.Point(455, 373);
+            this.join3.Name = "join3";
+            this.join3.Size = new System.Drawing.Size(28, 28);
+            this.join3.TabIndex = 3;
             // 
             // join5
             // 
@@ -280,16 +250,55 @@
             this.join5.Size = new System.Drawing.Size(28, 28);
             this.join5.TabIndex = 3;
             // 
-            // pipe5
+            // join6
             // 
-            this.pipe5.BackColor = System.Drawing.Color.White;
-            this.pipe5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pipe5.ForeColor = System.Drawing.Color.Black;
-            this.pipe5.Location = new System.Drawing.Point(403, 293);
-            this.pipe5.Name = "pipe5";
-            this.pipe5.Size = new System.Drawing.Size(40, 16);
-            this.pipe5.TabIndex = 3;
-            this.pipe5.Tag = "5";
+            this.join6.BackColor = System.Drawing.Color.BurlyWood;
+            this.join6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.join6.ForeColor = System.Drawing.Color.Black;
+            this.join6.Location = new System.Drawing.Point(375, 286);
+            this.join6.Name = "join6";
+            this.join6.Size = new System.Drawing.Size(28, 28);
+            this.join6.TabIndex = 3;
+            // 
+            // join7
+            // 
+            this.join7.BackColor = System.Drawing.Color.BurlyWood;
+            this.join7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.join7.ForeColor = System.Drawing.Color.Black;
+            this.join7.Location = new System.Drawing.Point(443, 286);
+            this.join7.Name = "join7";
+            this.join7.Size = new System.Drawing.Size(10, 28);
+            this.join7.TabIndex = 3;
+            // 
+            // join8
+            // 
+            this.join8.BackColor = System.Drawing.Color.BurlyWood;
+            this.join8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.join8.ForeColor = System.Drawing.Color.Black;
+            this.join8.Location = new System.Drawing.Point(455, 265);
+            this.join8.Name = "join8";
+            this.join8.Size = new System.Drawing.Size(28, 10);
+            this.join8.TabIndex = 3;
+            // 
+            // join9
+            // 
+            this.join9.BackColor = System.Drawing.Color.BurlyWood;
+            this.join9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.join9.ForeColor = System.Drawing.Color.Black;
+            this.join9.Location = new System.Drawing.Point(455, 113);
+            this.join9.Name = "join9";
+            this.join9.Size = new System.Drawing.Size(28, 28);
+            this.join9.TabIndex = 3;
+            // 
+            // join10
+            // 
+            this.join10.BackColor = System.Drawing.Color.BurlyWood;
+            this.join10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.join10.ForeColor = System.Drawing.Color.Black;
+            this.join10.Location = new System.Drawing.Point(302, 113);
+            this.join10.Name = "join10";
+            this.join10.Size = new System.Drawing.Size(10, 28);
+            this.join10.TabIndex = 3;
             // 
             // pipe1
             // 
@@ -302,17 +311,15 @@
             this.pipe1.TabIndex = 3;
             this.pipe1.Tag = "1";
             // 
-            // txtLevel1
+            // pipe2
             // 
-            this.txtLevel1.Enabled = false;
-            this.txtLevel1.Font = new System.Drawing.Font("Arial", 13.8F);
-            this.txtLevel1.Location = new System.Drawing.Point(118, 601);
-            this.txtLevel1.Name = "txtLevel1";
-            this.txtLevel1.ReadOnly = true;
-            this.txtLevel1.Size = new System.Drawing.Size(96, 34);
-            this.txtLevel1.TabIndex = 5;
-            this.txtLevel1.Text = "0%";
-            this.txtLevel1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.pipe2.BackColor = System.Drawing.Color.White;
+            this.pipe2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pipe2.Location = new System.Drawing.Point(461, 401);
+            this.pipe2.Name = "pipe2";
+            this.pipe2.Size = new System.Drawing.Size(16, 141);
+            this.pipe2.TabIndex = 4;
+            this.pipe2.Tag = "2";
             // 
             // pipe3
             // 
@@ -335,15 +342,49 @@
             this.pipe4.TabIndex = 4;
             this.pipe4.Tag = "4";
             // 
-            // join10
+            // pipe5
             // 
-            this.join10.BackColor = System.Drawing.Color.BurlyWood;
-            this.join10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.join10.ForeColor = System.Drawing.Color.Black;
-            this.join10.Location = new System.Drawing.Point(302, 113);
-            this.join10.Name = "join10";
-            this.join10.Size = new System.Drawing.Size(10, 28);
-            this.join10.TabIndex = 3;
+            this.pipe5.BackColor = System.Drawing.Color.White;
+            this.pipe5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pipe5.ForeColor = System.Drawing.Color.Black;
+            this.pipe5.Location = new System.Drawing.Point(403, 293);
+            this.pipe5.Name = "pipe5";
+            this.pipe5.Size = new System.Drawing.Size(40, 16);
+            this.pipe5.TabIndex = 3;
+            this.pipe5.Tag = "5";
+            // 
+            // pipe6
+            // 
+            this.pipe6.BackColor = System.Drawing.Color.White;
+            this.pipe6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pipe6.Location = new System.Drawing.Point(461, 141);
+            this.pipe6.Name = "pipe6";
+            this.pipe6.Size = new System.Drawing.Size(16, 124);
+            this.pipe6.TabIndex = 4;
+            this.pipe6.Tag = "6";
+            // 
+            // pipe7
+            // 
+            this.pipe7.BackColor = System.Drawing.Color.White;
+            this.pipe7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pipe7.ForeColor = System.Drawing.Color.Black;
+            this.pipe7.Location = new System.Drawing.Point(312, 119);
+            this.pipe7.Name = "pipe7";
+            this.pipe7.Size = new System.Drawing.Size(143, 16);
+            this.pipe7.TabIndex = 3;
+            this.pipe7.Tag = "7";
+            // 
+            // txtLevel1
+            // 
+            this.txtLevel1.Enabled = false;
+            this.txtLevel1.Font = new System.Drawing.Font("Arial", 13.8F);
+            this.txtLevel1.Location = new System.Drawing.Point(118, 601);
+            this.txtLevel1.Name = "txtLevel1";
+            this.txtLevel1.ReadOnly = true;
+            this.txtLevel1.Size = new System.Drawing.Size(96, 34);
+            this.txtLevel1.TabIndex = 5;
+            this.txtLevel1.Text = "0%";
+            this.txtLevel1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtLevel2
             // 
@@ -357,86 +398,47 @@
             this.txtLevel2.Text = "0%";
             this.txtLevel2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // join3
+            // picWaterTank1
             // 
-            this.join3.BackColor = System.Drawing.Color.BurlyWood;
-            this.join3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.join3.ForeColor = System.Drawing.Color.Black;
-            this.join3.Location = new System.Drawing.Point(455, 373);
-            this.join3.Name = "join3";
-            this.join3.Size = new System.Drawing.Size(28, 28);
-            this.join3.TabIndex = 3;
+            this.picWaterTank1.Image = global::PumpingSystem.Properties.Resources.water_tank_level_0;
+            this.picWaterTank1.InitialImage = null;
+            this.picWaterTank1.Location = new System.Drawing.Point(15, 334);
+            this.picWaterTank1.Name = "picWaterTank1";
+            this.picWaterTank1.Size = new System.Drawing.Size(300, 300);
+            this.picWaterTank1.TabIndex = 1;
+            this.picWaterTank1.TabStop = false;
             // 
-            // pipe6
+            // picWaterTank2
             // 
-            this.pipe6.BackColor = System.Drawing.Color.White;
-            this.pipe6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pipe6.Location = new System.Drawing.Point(461, 141);
-            this.pipe6.Name = "pipe6";
-            this.pipe6.Size = new System.Drawing.Size(16, 124);
-            this.pipe6.TabIndex = 4;
-            this.pipe6.Tag = "6";
+            this.picWaterTank2.Image = global::PumpingSystem.Properties.Resources.water_tank_level_0;
+            this.picWaterTank2.InitialImage = null;
+            this.picWaterTank2.Location = new System.Drawing.Point(15, 8);
+            this.picWaterTank2.Name = "picWaterTank2";
+            this.picWaterTank2.Size = new System.Drawing.Size(300, 300);
+            this.picWaterTank2.TabIndex = 1;
+            this.picWaterTank2.TabStop = false;
             // 
-            // join6
+            // picPump
             // 
-            this.join6.BackColor = System.Drawing.Color.BurlyWood;
-            this.join6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.join6.ForeColor = System.Drawing.Color.Black;
-            this.join6.Location = new System.Drawing.Point(375, 286);
-            this.join6.Name = "join6";
-            this.join6.Size = new System.Drawing.Size(28, 28);
-            this.join6.TabIndex = 3;
+            this.picPump.Image = global::PumpingSystem.Properties.Resources.pump;
+            this.picPump.Location = new System.Drawing.Point(438, 243);
+            this.picPump.Name = "picPump";
+            this.picPump.Size = new System.Drawing.Size(100, 100);
+            this.picPump.TabIndex = 2;
+            this.picPump.TabStop = false;
             // 
-            // join8
+            // btnPumpLed
             // 
-            this.join8.BackColor = System.Drawing.Color.BurlyWood;
-            this.join8.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.join8.ForeColor = System.Drawing.Color.Black;
-            this.join8.Location = new System.Drawing.Point(455, 265);
-            this.join8.Name = "join8";
-            this.join8.Size = new System.Drawing.Size(28, 10);
-            this.join8.TabIndex = 3;
-            // 
-            // pipe2
-            // 
-            this.pipe2.BackColor = System.Drawing.Color.White;
-            this.pipe2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pipe2.Location = new System.Drawing.Point(461, 401);
-            this.pipe2.Name = "pipe2";
-            this.pipe2.Size = new System.Drawing.Size(16, 141);
-            this.pipe2.TabIndex = 4;
-            this.pipe2.Tag = "2";
-            // 
-            // pipe7
-            // 
-            this.pipe7.BackColor = System.Drawing.Color.White;
-            this.pipe7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pipe7.ForeColor = System.Drawing.Color.Black;
-            this.pipe7.Location = new System.Drawing.Point(312, 119);
-            this.pipe7.Name = "pipe7";
-            this.pipe7.Size = new System.Drawing.Size(143, 16);
-            this.pipe7.TabIndex = 3;
-            this.pipe7.Tag = "7";
-            // 
-            // join9
-            // 
-            this.join9.BackColor = System.Drawing.Color.BurlyWood;
-            this.join9.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.join9.ForeColor = System.Drawing.Color.Black;
-            this.join9.Location = new System.Drawing.Point(455, 113);
-            this.join9.Name = "join9";
-            this.join9.Size = new System.Drawing.Size(28, 28);
-            this.join9.TabIndex = 3;
-            // 
-            // join7
-            // 
-            this.join7.BackColor = System.Drawing.Color.BurlyWood;
-            this.join7.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.join7.ForeColor = System.Drawing.Color.Black;
-            this.join7.Location = new System.Drawing.Point(443, 286);
-            this.join7.Name = "join7";
-            this.join7.Size = new System.Drawing.Size(10, 28);
-            this.join7.TabIndex = 3;
+            this.btnPumpLed.BackColor = System.Drawing.Color.Silver;
+            this.btnPumpLed.BackgroundImage = global::PumpingSystem.Properties.Resources.led_off;
+            this.btnPumpLed.Enabled = false;
+            this.btnPumpLed.FlatAppearance.BorderSize = 0;
+            this.btnPumpLed.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPumpLed.Location = new System.Drawing.Point(492, 202);
+            this.btnPumpLed.Name = "btnPumpLed";
+            this.btnPumpLed.Size = new System.Drawing.Size(35, 35);
+            this.btnPumpLed.TabIndex = 7;
+            this.btnPumpLed.UseVisualStyleBackColor = false;
             // 
             // panel3
             // 
@@ -477,6 +479,17 @@
             this.panel5.Size = new System.Drawing.Size(914, 31);
             this.panel5.TabIndex = 0;
             // 
+            // button1
+            // 
+            this.button1.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.button1.Location = new System.Drawing.Point(154, 418);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 31);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(23F, 46F);
@@ -500,9 +513,9 @@
             this.grpMenu.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picPump)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picWaterTank2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWaterTank1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picWaterTank2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPump)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
@@ -546,6 +559,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button button1;
     }
 }
 

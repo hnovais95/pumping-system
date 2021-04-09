@@ -1,15 +1,18 @@
-﻿namespace PumpingSystem.Server
+﻿using System;
+
+namespace PumpingSystem.Server
 {
+    [Serializable]
     public class WaterTank
     {
         private int _Level;
         private int _MinLevel;
-        public bool Alterada { get; set; }
+        public bool Changed { get; set; }
 
         public WaterTank()
         {
             _Level = 0;
-            Alterada = false;
+            Changed = false;
         }
 
         public int Level
@@ -21,7 +24,7 @@
             set
             {
                 _Level = value;
-                Alterada = true;
+                Changed = true;
             }
         }
 
@@ -34,7 +37,7 @@
             set
             {
                 _MinLevel = value;
-                Alterada = true;
+                Changed = true;
             }
         }
     }

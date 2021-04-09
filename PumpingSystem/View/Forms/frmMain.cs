@@ -21,11 +21,24 @@ namespace PumpingSystem.View
     {
         private MsgDataWaterTank[] _MsgsDataWaterTank = { new MsgDataWaterTank(), new MsgDataWaterTank() };
         private MsgDataPump _MsgDataPump = new MsgDataPump();
-        private MsgOperationMode _MsgOperationMode = new MsgOperationMode();
 
         public frmMain()
         {
             InitializeComponent();
+        }
+
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            join1.BringToFront();
+            join7.BringToFront();
+            join8.BringToFront();
+            join10.BringToFront();
+            pipe1.BringToFront();
+            pipe5.BringToFront();
+            pipe6.BringToFront();
+            pipe7.BringToFront();
+            txtLevel1.BringToFront();
+            txtLevel2.BringToFront();
         }
 
         public void UpdateWaterTanks(MsgDataWaterTank[] msgs)
@@ -79,28 +92,8 @@ namespace PumpingSystem.View
                 {
                     btnPumpLed.BackgroundImage = msg.StatusPump == EnumPumpStatus.On ? Properties.Resources.led_on : Properties.Resources.led_off;
                     btnOnOff.BackgroundImage = msg.StatusPump == EnumPumpStatus.On ? Properties.Resources.button_on : Properties.Resources.button_off;
-                    UpdatePipes(msg.StatusPump);
-                }
-                catch (Exception e)
-                {
-                    txtMsg.Text = e.Message;
-                }
-            };
-            if (!this.IsHandleCreated)
-                mth.Invoke();
-            else
-                this.BeginInvoke(mth);
-        }
-
-        public void UpdateOperationMode(MsgOperationMode msg)
-        {
-            _MsgOperationMode = msg;
-
-            MethodInvoker mth = (MethodInvoker)delegate ()
-            {
-                try
-                {
                     btnOperationMode.IsOn = msg.OperationMode == EnumOperationMode.Automatic ? true : false;
+                    UpdatePipes(msg.StatusPump);
                 }
                 catch (Exception e)
                 {
@@ -164,20 +157,6 @@ namespace PumpingSystem.View
             thread.Start();
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
-        {
-            join1.BringToFront();
-            join7.BringToFront();
-            join8.BringToFront();
-            join10.BringToFront();
-            pipe1.BringToFront();
-            pipe5.BringToFront();
-            pipe6.BringToFront();
-            pipe7.BringToFront();
-            txtLevel1.BringToFront();
-            txtLevel2.BringToFront();
-        }
-
         private void btnOnOff_Click(object sender, EventArgs e)
         {
             try
@@ -196,10 +175,11 @@ namespace PumpingSystem.View
                 txtMsg.Text = _MsgDataPump.StatusPump == EnumPumpStatus.On ? "Bomba acionada." : "Bomba desligada.";
 
                 UpdatePump(_MsgDataPump);
-                Program.InterfaceView.SendPumpStatus(_MsgDataPump);
+                Program.ViewService.SendPumpStatus(_MsgDataPump);
             }
             catch (Exception exc)
             {
+                txtMsg.Text = exc.Message;
             }
             finally
             {
@@ -213,27 +193,33 @@ namespace PumpingSystem.View
             {
                 Cursor = Cursors.WaitCursor;
 
-                if (_MsgOperationMode.OperationMode == EnumOperationMode.Automatic)
+                if (_MsgDataPump.OperationMode == EnumOperationMode.Automatic)
                 {
-                    _MsgOperationMode.OperationMode = EnumOperationMode.Manual;
+                    _MsgDataPump.OperationMode = EnumOperationMode.Manual;
                 }
                 else
                 {
-                    _MsgOperationMode.OperationMode = EnumOperationMode.Automatic;
+                    _MsgDataPump.OperationMode = EnumOperationMode.Automatic;
                 }
 
-                txtMsg.Text = _MsgOperationMode.OperationMode == EnumOperationMode.Automatic ? "Modo de operação automático acionado." : "Modo de operação manual acionado.";
+                txtMsg.Text = _MsgDataPump.OperationMode == EnumOperationMode.Automatic ? "Modo de operação automático acionado." : "Modo de operação manual acionado.";
 
-                UpdateOperationMode(_MsgOperationMode);
-                Program.InterfaceView.SendOperationMode(_MsgOperationMode);
+                UpdatePump(_MsgDataPump);
+                Program.ViewService.SendOperationMode(_MsgDataPump);
             }
             catch (Exception exc)
-            { 
+            {
+                txtMsg.Text = exc.Message;
             }
             finally
             {
                 Cursor = Cursors.Default;
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Program.ViewService.UpdateProcessChart(null, null);
         }
     }
 }

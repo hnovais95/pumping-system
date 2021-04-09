@@ -33,5 +33,16 @@ namespace PumpingSystem.Properties {
                 return ((string)(this["DbPumpingSystemConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\Databases\\Pum" +
+            "pingSystem.mdf;Integrated Security=True")]
+        public string PumpingSystemConnectionString {
+            get {
+                return ((string)(this["PumpingSystemConnectionString"]));
+            }
+        }
     }
 }

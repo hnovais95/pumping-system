@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 namespace PumpingSystem.Common
 {
+    [Serializable]
     public class ProcessChart
     {
         public List<DataProcessChart> Data { get; }
@@ -21,6 +22,7 @@ namespace PumpingSystem.Common
         }
     }
 
+    [Serializable]
     public class DataProcessChart
     {
         public DateTime SampleDate { get; set; }
@@ -31,6 +33,7 @@ namespace PumpingSystem.Common
         public DataProcessChart()
         {
             this.SampleDate = DateTime.Now;
+            this.Level = new int[2];
         }
 
     }
