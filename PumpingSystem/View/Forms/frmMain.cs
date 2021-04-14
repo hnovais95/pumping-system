@@ -14,6 +14,7 @@ using System.Reflection;
 using PumpingSystem.Messages.View;
 using PumpingSystem.Common;
 using PumpingSystem.Server;
+using PumpingSystem.Driver.Uart.Modbus;
 
 namespace PumpingSystem.View
 {
@@ -175,7 +176,7 @@ namespace PumpingSystem.View
                 txtMsg.Text = _MsgDataPump.StatusPump == EnumPumpStatus.On ? "Bomba acionada." : "Bomba desligada.";
 
                 UpdatePump(_MsgDataPump);
-                Program.ViewService.SendPumpStatus(_MsgDataPump);
+                Program.ViewService.SendPumpData(_MsgDataPump);
             }
             catch (Exception exc)
             {
@@ -205,7 +206,7 @@ namespace PumpingSystem.View
                 txtMsg.Text = _MsgDataPump.OperationMode == EnumOperationMode.Automatic ? "Modo de operação automático acionado." : "Modo de operação manual acionado.";
 
                 UpdatePump(_MsgDataPump);
-                Program.ViewService.SendOperationMode(_MsgDataPump);
+                Program.ViewService.SendPumpData(_MsgDataPump);
             }
             catch (Exception exc)
             {
@@ -220,6 +221,16 @@ namespace PumpingSystem.View
         private void button1_Click(object sender, EventArgs e)
         {
             Program.ViewService.UpdateProcessChart(null, null);
+        }
+
+        private void btnWrite_Click(object sender, EventArgs e)
+        {
+            //ModbusSerialRTUMasterDriver.ModbusSerialRtuMasterWriteRegisters();
+        }
+
+        private void btnRead_Click(object sender, EventArgs e)
+        {
+            //ModbusSerialRTUMasterDriver.ModbusSerialRtuMasterReadHoldingRegisters();
         }
     }
 }

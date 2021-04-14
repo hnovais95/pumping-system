@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.IO.Ports;
-using PumpingSystem.Driver;
+using PumpingSystem.Driver.Uart;
+using PumpingSystem.Driver.Uart.Modbus;
 using PumpingSystem.View;
 using PumpingSystem.Server;
 using PumpingSystem.Server.Repository;
@@ -13,7 +14,8 @@ namespace PumpingSystem
         private static IUpdatableForm<Form> _View;
         private static RepositoryService _RepositoryService;
         public static RTDB RTDB;
-        public static UartDriver UartDriver;
+        //public static UartDriver UartDriver;
+        public static ModbusSerialRTUMasterDriver ModbusSerialRTUMasterDriver;
         public static UartService UartService;
         public static ViewService ViewService;
 
@@ -26,7 +28,9 @@ namespace PumpingSystem
             RTDB = new RTDB();
 
             UartService = new UartService();
-            UartDriver = new UartDriver(new SerialPort());
+            //UartDriver = new UartDriver(new SerialPort());
+            ModbusSerialRTUMasterDriver = new ModbusSerialRTUMasterDriver(new SerialPort());
+            ModbusSerialRTUMasterDriver.Initialize();
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

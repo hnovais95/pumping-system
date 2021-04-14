@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.splMain = new System.Windows.Forms.SplitContainer();
+            this.btnTestDb = new System.Windows.Forms.Button();
             this.grpMenu = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
@@ -64,7 +65,8 @@
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtMsg = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnWrite = new System.Windows.Forms.Button();
+            this.btnRead = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splMain)).BeginInit();
             this.splMain.Panel1.SuspendLayout();
             this.splMain.Panel2.SuspendLayout();
@@ -87,7 +89,9 @@
             // 
             // splMain.Panel1
             // 
-            this.splMain.Panel1.Controls.Add(this.button1);
+            this.splMain.Panel1.Controls.Add(this.btnRead);
+            this.splMain.Panel1.Controls.Add(this.btnWrite);
+            this.splMain.Panel1.Controls.Add(this.btnTestDb);
             this.splMain.Panel1.Controls.Add(this.grpMenu);
             // 
             // splMain.Panel2
@@ -117,6 +121,17 @@
             this.splMain.Size = new System.Drawing.Size(911, 643);
             this.splMain.SplitterDistance = 353;
             this.splMain.TabIndex = 11;
+            // 
+            // btnTestDb
+            // 
+            this.btnTestDb.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.btnTestDb.Location = new System.Drawing.Point(154, 418);
+            this.btnTestDb.Name = "btnTestDb";
+            this.btnTestDb.Size = new System.Drawing.Size(75, 31);
+            this.btnTestDb.TabIndex = 10;
+            this.btnTestDb.Text = "Test DB";
+            this.btnTestDb.UseVisualStyleBackColor = true;
+            this.btnTestDb.Click += new System.EventHandler(this.button1_Click);
             // 
             // grpMenu
             // 
@@ -381,7 +396,7 @@
             this.txtLevel1.Location = new System.Drawing.Point(118, 601);
             this.txtLevel1.Name = "txtLevel1";
             this.txtLevel1.ReadOnly = true;
-            this.txtLevel1.Size = new System.Drawing.Size(96, 34);
+            this.txtLevel1.Size = new System.Drawing.Size(96, 29);
             this.txtLevel1.TabIndex = 5;
             this.txtLevel1.Text = "0%";
             this.txtLevel1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -393,7 +408,7 @@
             this.txtLevel2.Location = new System.Drawing.Point(118, 275);
             this.txtLevel2.Name = "txtLevel2";
             this.txtLevel2.ReadOnly = true;
-            this.txtLevel2.Size = new System.Drawing.Size(96, 34);
+            this.txtLevel2.Size = new System.Drawing.Size(96, 29);
             this.txtLevel2.TabIndex = 5;
             this.txtLevel2.Text = "0%";
             this.txtLevel2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -467,7 +482,7 @@
             this.txtMsg.Location = new System.Drawing.Point(0, 12);
             this.txtMsg.Name = "txtMsg";
             this.txtMsg.ReadOnly = true;
-            this.txtMsg.Size = new System.Drawing.Size(911, 27);
+            this.txtMsg.Size = new System.Drawing.Size(911, 23);
             this.txtMsg.TabIndex = 0;
             // 
             // panel5
@@ -479,20 +494,31 @@
             this.panel5.Size = new System.Drawing.Size(914, 31);
             this.panel5.TabIndex = 0;
             // 
-            // button1
+            // btnWrite
             // 
-            this.button1.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.button1.Location = new System.Drawing.Point(154, 418);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 31);
-            this.button1.TabIndex = 10;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnWrite.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.btnWrite.Location = new System.Drawing.Point(154, 470);
+            this.btnWrite.Name = "btnWrite";
+            this.btnWrite.Size = new System.Drawing.Size(75, 31);
+            this.btnWrite.TabIndex = 10;
+            this.btnWrite.Text = "Write";
+            this.btnWrite.UseVisualStyleBackColor = true;
+            this.btnWrite.Click += new System.EventHandler(this.btnWrite_Click);
+            // 
+            // btnRead
+            // 
+            this.btnRead.Font = new System.Drawing.Font("Tahoma", 10F);
+            this.btnRead.Location = new System.Drawing.Point(154, 511);
+            this.btnRead.Name = "btnRead";
+            this.btnRead.Size = new System.Drawing.Size(75, 31);
+            this.btnRead.TabIndex = 10;
+            this.btnRead.Text = "Read";
+            this.btnRead.UseVisualStyleBackColor = true;
+            this.btnRead.Click += new System.EventHandler(this.btnRead_Click);
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(23F, 46F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(18F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(917, 726);
             this.Controls.Add(this.panel3);
@@ -559,7 +585,9 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnTestDb;
+        private System.Windows.Forms.Button btnRead;
+        private System.Windows.Forms.Button btnWrite;
     }
 }
 

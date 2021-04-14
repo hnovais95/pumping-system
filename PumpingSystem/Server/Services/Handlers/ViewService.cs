@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Timers;
-using System.Threading;
 using System.Threading.Tasks;
 using PumpingSystem.Messages.View;
 using PumpingSystem.Messages.Uart;
@@ -29,7 +28,7 @@ namespace PumpingSystem.Server
             _DataPublisherTimer = new System.Timers.Timer(interval);
             _DataPublisherTimer.Elapsed += PublishData;
             _DataPublisherTimer.AutoReset = true;
-            _DataPublisherTimer.Enabled = false;
+            _DataPublisherTimer.Enabled = true;
         }
 
         public void InitializeProcessChartUpdaterTimer(int interval)
@@ -43,12 +42,10 @@ namespace PumpingSystem.Server
         public void UpdateProcessChart(Object source, ElapsedEventArgs e)
         {
             RTDB rtdb = Program.RTDB;
-            //Task.Factory.StartNew(() =>
-            //{
+            Task.Factory.StartNew(() =>
+            {
                 try
                 {
-                    //Monitor.TryEnter(rtdb);
-
                     DataProcessChart data = new DataProcessChart();
                     for (int i = 0; i < rtdb.Tanks.Length; i++)
                     {
@@ -58,6 +55,9 @@ namespace PumpingSystem.Server
                     data.PumpStatus = (int)rtdb.Pump.Status;
 
                     rtdb.ProcessChart.Add(data);
+
+                    #region -- T E S T   D A T A B A S E
+
                     //_RepositoryService.InsertProcessChart(rtdb.ProcessChart);
 
                     /*var strStartDate = "09/04/2021 17:00:00";
@@ -66,16 +66,14 @@ namespace PumpingSystem.Server
                     DateTime endDate = Convert.ToDateTime(strEndDate);
 
                     _RepositoryService.GetProcessChartByPeriod(startDate, endDate);*/
+
+                    #endregion -- T E S T   D A T A B A S E
                 }
                 catch (Exception exc)
                 {
 
                 }
-                finally
-                {
-              //      Monitor.Exit(rtdb);
-                }
-            //});
+            });
         }
 
         private void PublishData(Object source, ElapsedEventArgs e)
@@ -86,8 +84,6 @@ namespace PumpingSystem.Server
 
                 try
                 {
-                    Monitor.TryEnter(rtdb);
-
                     bool send = false;
 
                     MsgDataWaterTank[] msgsDataWaterTank = new MsgDataWaterTank[2];
@@ -115,10 +111,6 @@ namespace PumpingSystem.Server
                 {
 
                 }
-                finally
-                {
-                    Monitor.Exit(rtdb);
-                }
             });
         }
 
@@ -132,54 +124,27 @@ namespace PumpingSystem.Server
             _View.UpdatePump(msg);
         }
 
-        public void SendPumpStatus(MsgDataPump msg)
+        public void SendPumpData(MsgDataPump msg)
         {
             RTDB rtdb = Program.RTDB;
             Task.Factory.StartNew(() =>
             {
                 try
                 {
-                    Monitor.TryEnter(rtdb);
-
                     if (msg.StatusPump == EnumPumpStatus.On)
                         Program.RTDB.Pump.TurnOnPump();
                     else
                         Program.RTDB.Pump.TurnOffPump();
-
-                    Program.UartService.SendMessage(new MsgTelegram200((int)msg.StatusPump));
-                }
-                catch (Exception e)
-                {
-                }
-                finally
-                {
-                    Monitor.Exit(rtdb);
-                }
-            });
-        }
-
-        public void SendOperationMode(MsgDataPump msg)
-        {
-            RTDB rtdb = Program.RTDB;
-            Task.Factory.StartNew(() =>
-            {
-                try
-                {
-                    Monitor.TryEnter(rtdb);
 
                     if (msg.OperationMode == EnumOperationMode.Automatic)
                         Program.RTDB.Pump.OperationMode = EnumOperationMode.Automatic;
                     else
                         Program.RTDB.Pump.OperationMode = EnumOperationMode.Manual;
 
-                    Program.UartService.SendMessage(new MsgTelegram201((int)msg.OperationMode));
+                    Program.UartService.SendMessage(new MsgTelegram200((int)msg.StatusPump, (int)msg.OperationMode));
                 }
                 catch (Exception e)
                 {
-                }
-                finally
-                {
-                    Monitor.Exit(rtdb);
                 }
             });
         }
