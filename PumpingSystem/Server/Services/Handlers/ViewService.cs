@@ -2,6 +2,7 @@
 using System.Windows.Forms;
 using System.Timers;
 using System.Threading.Tasks;
+using System.Linq;
 using PumpingSystem.Messages.View;
 using PumpingSystem.Messages.Uart;
 using PumpingSystem.Common;
@@ -36,7 +37,7 @@ namespace PumpingSystem.Server
             _ProcessChartUpdaterTimer = new System.Timers.Timer(interval);
             _ProcessChartUpdaterTimer.Elapsed += UpdateProcessChart;
             _ProcessChartUpdaterTimer.AutoReset = true;
-            _ProcessChartUpdaterTimer.Enabled = false;
+            _ProcessChartUpdaterTimer.Enabled = true;
         }
 
         public void UpdateProcessChart(Object source, ElapsedEventArgs e)
@@ -46,7 +47,7 @@ namespace PumpingSystem.Server
             {
                 try
                 {
-                    DataProcessChart data = new DataProcessChart();
+                    ProcessChartData data = new ProcessChartData();
                     for (int i = 0; i < rtdb.Tanks.Length; i++)
                     {
                         data.Level[i] = rtdb.Tanks[i].Level;
@@ -86,11 +87,11 @@ namespace PumpingSystem.Server
                 {
                     bool send = false;
 
-                    MsgDataWaterTank[] msgsDataWaterTank = new MsgDataWaterTank[2];
+                    MsgWaterTankData[] msgsDataWaterTank = new MsgWaterTankData[2];
                     for (int i = 0; i < rtdb.Tanks.Length; i++)
                     {
                         WaterTank waterTank = rtdb.Tanks[i];
-                        msgsDataWaterTank[i] = new MsgDataWaterTank(waterTank.Level, waterTank.MinLevel);
+                        msgsDataWaterTank[i] = new MsgWaterTankData(waterTank.Level, waterTank.MinLevel);
                         send |= waterTank.Changed;
                         waterTank.Changed = false;
                     }
@@ -102,9 +103,20 @@ namespace PumpingSystem.Server
 
                     if (rtdb.Pump.Changed)
                     {
-                        MsgDataPump msg = new MsgDataPump(rtdb.Pump.Status, rtdb.Pump.OperationMode);
+                        MsgPumpData msg = new MsgPumpData(rtdb.Pump.Status, rtdb.Pump.OperationMode);
                         PublishDataPump(msg);
                         rtdb.Pump.Changed = false;
+                    }
+
+                    for (int i = 0; i < rtdb.ProcessChart.Data.Count; i++)
+                    {
+                        if (rtdb.ProcessChart.Changed)
+                        {
+                            MsgChartData msg = new MsgChartData();
+                            //msg.Data.Add(rtdb.ProcessChart.Data.Last());
+                            msg.Data = rtdb.ProcessChart.Data;
+                            PublishChart(msg);
+                        }
                     }
                 }
                 catch (Exception exc)
@@ -114,17 +126,22 @@ namespace PumpingSystem.Server
             });
         }
 
-        private void PublishDataWaterTank(MsgDataWaterTank[] msgs)
+        private void PublishChart(MsgChartData msg)
+        {
+            _View.UpdateChart(msg);
+        }
+
+        private void PublishDataWaterTank(MsgWaterTankData[] msgs)
         {
             _View.UpdateWaterTanks(msgs);
         }
 
-        private void PublishDataPump(MsgDataPump msg)
+        private void PublishDataPump(MsgPumpData msg)
         {
             _View.UpdatePump(msg);
         }
 
-        public void SendPumpData(MsgDataPump msg)
+        public void SendPumpData(MsgPumpData msg)
         {
             RTDB rtdb = Program.RTDB;
             Task.Factory.StartNew(() =>

@@ -28,16 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.Title title1 = new System.Windows.Forms.DataVisualization.Charting.Title();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.tabLive = new System.Windows.Forms.TabPage();
             this.splMain = new System.Windows.Forms.SplitContainer();
-            this.btnTestDb = new System.Windows.Forms.Button();
             this.grpMenu = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnOperationMode = new PumpingSystem.View.ToggleButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnOnOff = new PumpingSystem.View.CircularButton();
             this.label1 = new System.Windows.Forms.Label();
             this.join1 = new System.Windows.Forms.Panel();
             this.join2 = new System.Windows.Forms.Panel();
@@ -60,13 +65,23 @@
             this.picWaterTank1 = new System.Windows.Forms.PictureBox();
             this.picWaterTank2 = new System.Windows.Forms.PictureBox();
             this.picPump = new System.Windows.Forms.PictureBox();
-            this.btnPumpLed = new PumpingSystem.View.CircularButton();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.tabHistorical = new System.Windows.Forms.TabPage();
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtMsg = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
-            this.btnWrite = new System.Windows.Forms.Button();
-            this.btnRead = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.chtLevel = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            this.btnOperationMode = new PumpingSystem.View.ToggleButton();
+            this.btnOnOff = new PumpingSystem.View.CircularButton();
+            this.btnPumpLed = new PumpingSystem.View.CircularButton();
+            this.panel3.SuspendLayout();
+            this.tabControl1.SuspendLayout();
+            this.tabLive.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splMain)).BeginInit();
             this.splMain.Panel1.SuspendLayout();
             this.splMain.Panel2.SuspendLayout();
@@ -77,21 +92,54 @@
             ((System.ComponentModel.ISupportInitialize)(this.picWaterTank1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWaterTank2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPump)).BeginInit();
-            this.panel3.SuspendLayout();
+            this.tabHistorical.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.panel5.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chtLevel)).BeginInit();
             this.SuspendLayout();
+            // 
+            // panel3
+            // 
+            this.panel3.Controls.Add(this.tabControl1);
+            this.panel3.Controls.Add(this.panel4);
+            this.panel3.Controls.Add(this.panel5);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(929, 756);
+            this.panel3.TabIndex = 12;
+            // 
+            // tabControl1
+            // 
+            this.tabControl1.Controls.Add(this.tabLive);
+            this.tabControl1.Controls.Add(this.tabHistorical);
+            this.tabControl1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tabControl1.Location = new System.Drawing.Point(0, 40);
+            this.tabControl1.Name = "tabControl1";
+            this.tabControl1.SelectedIndex = 0;
+            this.tabControl1.Size = new System.Drawing.Size(929, 683);
+            this.tabControl1.TabIndex = 1;
+            // 
+            // tabLive
+            // 
+            this.tabLive.BackColor = System.Drawing.SystemColors.Control;
+            this.tabLive.Controls.Add(this.splMain);
+            this.tabLive.Location = new System.Drawing.Point(4, 25);
+            this.tabLive.Name = "tabLive";
+            this.tabLive.Padding = new System.Windows.Forms.Padding(3);
+            this.tabLive.Size = new System.Drawing.Size(921, 654);
+            this.tabLive.TabIndex = 0;
+            this.tabLive.Text = "Live";
             // 
             // splMain
             // 
             this.splMain.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.splMain.Location = new System.Drawing.Point(3, 40);
+            this.splMain.Location = new System.Drawing.Point(5, 6);
             this.splMain.Name = "splMain";
             // 
             // splMain.Panel1
             // 
-            this.splMain.Panel1.Controls.Add(this.btnRead);
-            this.splMain.Panel1.Controls.Add(this.btnWrite);
-            this.splMain.Panel1.Controls.Add(this.btnTestDb);
             this.splMain.Panel1.Controls.Add(this.grpMenu);
             // 
             // splMain.Panel2
@@ -120,18 +168,7 @@
             this.splMain.Panel2.Controls.Add(this.btnPumpLed);
             this.splMain.Size = new System.Drawing.Size(911, 643);
             this.splMain.SplitterDistance = 353;
-            this.splMain.TabIndex = 11;
-            // 
-            // btnTestDb
-            // 
-            this.btnTestDb.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.btnTestDb.Location = new System.Drawing.Point(154, 418);
-            this.btnTestDb.Name = "btnTestDb";
-            this.btnTestDb.Size = new System.Drawing.Size(75, 31);
-            this.btnTestDb.TabIndex = 10;
-            this.btnTestDb.Text = "Test DB";
-            this.btnTestDb.UseVisualStyleBackColor = true;
-            this.btnTestDb.Click += new System.EventHandler(this.button1_Click);
+            this.splMain.TabIndex = 14;
             // 
             // grpMenu
             // 
@@ -165,23 +202,6 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "MANUAL/AUTO:";
             // 
-            // btnOperationMode
-            // 
-            this.btnOperationMode.BorderColor = System.Drawing.Color.LightGray;
-            this.btnOperationMode.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnOperationMode.ForeColor = System.Drawing.Color.White;
-            this.btnOperationMode.IsOn = true;
-            this.btnOperationMode.Location = new System.Drawing.Point(168, 34);
-            this.btnOperationMode.Name = "btnOperationMode";
-            this.btnOperationMode.OffColor = System.Drawing.Color.DarkGray;
-            this.btnOperationMode.OffText = "";
-            this.btnOperationMode.OnColor = System.Drawing.Color.Lime;
-            this.btnOperationMode.OnText = "";
-            this.btnOperationMode.Size = new System.Drawing.Size(60, 35);
-            this.btnOperationMode.TabIndex = 6;
-            this.btnOperationMode.TextEnabled = true;
-            this.btnOperationMode.Click += new System.EventHandler(this.btnOperationMode_Click);
-            // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Transparent;
@@ -200,18 +220,6 @@
             this.label3.Size = new System.Drawing.Size(81, 22);
             this.label3.TabIndex = 7;
             this.label3.Text = "ON/OFF:";
-            // 
-            // btnOnOff
-            // 
-            this.btnOnOff.BackgroundImage = global::PumpingSystem.Properties.Resources.button_off;
-            this.btnOnOff.FlatAppearance.BorderSize = 0;
-            this.btnOnOff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnOnOff.Location = new System.Drawing.Point(146, 4);
-            this.btnOnOff.Name = "btnOnOff";
-            this.btnOnOff.Size = new System.Drawing.Size(101, 101);
-            this.btnOnOff.TabIndex = 8;
-            this.btnOnOff.UseVisualStyleBackColor = true;
-            this.btnOnOff.Click += new System.EventHandler(this.btnOnOff_Click);
             // 
             // label1
             // 
@@ -442,6 +450,167 @@
             this.picPump.TabIndex = 2;
             this.picPump.TabStop = false;
             // 
+            // tabHistorical
+            // 
+            this.tabHistorical.BackColor = System.Drawing.SystemColors.Control;
+            this.tabHistorical.Controls.Add(this.chtLevel);
+            this.tabHistorical.Location = new System.Drawing.Point(4, 25);
+            this.tabHistorical.Name = "tabHistorical";
+            this.tabHistorical.Padding = new System.Windows.Forms.Padding(3);
+            this.tabHistorical.Size = new System.Drawing.Size(921, 654);
+            this.tabHistorical.TabIndex = 1;
+            this.tabHistorical.Text = "Historical";
+            // 
+            // panel4
+            // 
+            this.panel4.Controls.Add(this.txtMsg);
+            this.panel4.Location = new System.Drawing.Point(2, 725);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(923, 28);
+            this.panel4.TabIndex = 0;
+            // 
+            // txtMsg
+            // 
+            this.txtMsg.BackColor = System.Drawing.SystemColors.Control;
+            this.txtMsg.Enabled = false;
+            this.txtMsg.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMsg.Location = new System.Drawing.Point(0, 3);
+            this.txtMsg.Name = "txtMsg";
+            this.txtMsg.ReadOnly = true;
+            this.txtMsg.Size = new System.Drawing.Size(924, 23);
+            this.txtMsg.TabIndex = 0;
+            // 
+            // panel5
+            // 
+            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.Controls.Add(this.menuStrip1);
+            this.panel5.Location = new System.Drawing.Point(0, 3);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(926, 31);
+            this.panel5.TabIndex = 0;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.toolsToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(926, 24);
+            this.menuStrip1.TabIndex = 0;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exitToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.aboutToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // aboutToolStripMenuItem
+            // 
+            this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
+            this.aboutToolStripMenuItem.Text = "About";
+            // 
+            // chtLevel
+            // 
+            this.chtLevel.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.chtLevel.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter;
+            this.chtLevel.BackSecondaryColor = System.Drawing.Color.White;
+            this.chtLevel.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            chartArea1.AxisX.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Horizontal;
+            chartArea1.AxisX.Title = "Timestamp (HH:mm:ss)";
+            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY.Title = "Level (%)";
+            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.Name = "ChartArea1";
+            this.chtLevel.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chtLevel.Legends.Add(legend1);
+            this.chtLevel.Location = new System.Drawing.Point(96, 71);
+            this.chtLevel.Name = "chtLevel";
+            this.chtLevel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            series1.BorderWidth = 2;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series1.Color = System.Drawing.SystemColors.MenuHighlight;
+            series1.Legend = "Legend1";
+            series1.LegendText = "Level - Water Tank 1";
+            series1.Name = "Level1";
+            series1.YValuesPerPoint = 2;
+            series2.BorderWidth = 2;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
+            series2.Color = System.Drawing.Color.Red;
+            series2.Legend = "Legend1";
+            series2.LegendText = "Level - Water Tank 2";
+            series2.Name = "Level2";
+            this.chtLevel.Series.Add(series1);
+            this.chtLevel.Series.Add(series2);
+            this.chtLevel.Size = new System.Drawing.Size(712, 379);
+            this.chtLevel.TabIndex = 0;
+            this.chtLevel.Text = "chart1";
+            title1.BackColor = System.Drawing.Color.White;
+            title1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            title1.Name = "Title1";
+            title1.Text = "Water Tank Level";
+            this.chtLevel.Titles.Add(title1);
+            // 
+            // btnOperationMode
+            // 
+            this.btnOperationMode.BorderColor = System.Drawing.Color.LightGray;
+            this.btnOperationMode.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnOperationMode.ForeColor = System.Drawing.Color.White;
+            this.btnOperationMode.IsOn = true;
+            this.btnOperationMode.Location = new System.Drawing.Point(168, 34);
+            this.btnOperationMode.Name = "btnOperationMode";
+            this.btnOperationMode.OffColor = System.Drawing.Color.DarkGray;
+            this.btnOperationMode.OffText = "";
+            this.btnOperationMode.OnColor = System.Drawing.Color.Lime;
+            this.btnOperationMode.OnText = "";
+            this.btnOperationMode.Size = new System.Drawing.Size(60, 35);
+            this.btnOperationMode.TabIndex = 6;
+            this.btnOperationMode.TextEnabled = true;
+            this.btnOperationMode.Click += new System.EventHandler(this.btnOperationMode_Click);
+            // 
+            // btnOnOff
+            // 
+            this.btnOnOff.BackgroundImage = global::PumpingSystem.Properties.Resources.button_off;
+            this.btnOnOff.FlatAppearance.BorderSize = 0;
+            this.btnOnOff.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnOnOff.Location = new System.Drawing.Point(146, 4);
+            this.btnOnOff.Name = "btnOnOff";
+            this.btnOnOff.Size = new System.Drawing.Size(101, 101);
+            this.btnOnOff.TabIndex = 8;
+            this.btnOnOff.UseVisualStyleBackColor = true;
+            this.btnOnOff.Click += new System.EventHandler(this.btnOnOff_Click);
+            // 
             // btnPumpLed
             // 
             this.btnPumpLed.BackColor = System.Drawing.Color.Silver;
@@ -455,82 +624,25 @@
             this.btnPumpLed.TabIndex = 7;
             this.btnPumpLed.UseVisualStyleBackColor = false;
             // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.splMain);
-            this.panel3.Controls.Add(this.panel4);
-            this.panel3.Controls.Add(this.panel5);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel3.Location = new System.Drawing.Point(0, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(917, 726);
-            this.panel3.TabIndex = 12;
-            // 
-            // panel4
-            // 
-            this.panel4.Controls.Add(this.txtMsg);
-            this.panel4.Location = new System.Drawing.Point(3, 687);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(911, 37);
-            this.panel4.TabIndex = 0;
-            // 
-            // txtMsg
-            // 
-            this.txtMsg.BackColor = System.Drawing.SystemColors.Control;
-            this.txtMsg.Enabled = false;
-            this.txtMsg.Font = new System.Drawing.Font("Arial", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMsg.Location = new System.Drawing.Point(0, 12);
-            this.txtMsg.Name = "txtMsg";
-            this.txtMsg.ReadOnly = true;
-            this.txtMsg.Size = new System.Drawing.Size(911, 23);
-            this.txtMsg.TabIndex = 0;
-            // 
-            // panel5
-            // 
-            this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.panel5.Location = new System.Drawing.Point(0, 3);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(914, 31);
-            this.panel5.TabIndex = 0;
-            // 
-            // btnWrite
-            // 
-            this.btnWrite.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.btnWrite.Location = new System.Drawing.Point(154, 470);
-            this.btnWrite.Name = "btnWrite";
-            this.btnWrite.Size = new System.Drawing.Size(75, 31);
-            this.btnWrite.TabIndex = 10;
-            this.btnWrite.Text = "Write";
-            this.btnWrite.UseVisualStyleBackColor = true;
-            this.btnWrite.Click += new System.EventHandler(this.btnWrite_Click);
-            // 
-            // btnRead
-            // 
-            this.btnRead.Font = new System.Drawing.Font("Tahoma", 10F);
-            this.btnRead.Location = new System.Drawing.Point(154, 511);
-            this.btnRead.Name = "btnRead";
-            this.btnRead.Size = new System.Drawing.Size(75, 31);
-            this.btnRead.TabIndex = 10;
-            this.btnRead.Text = "Read";
-            this.btnRead.UseVisualStyleBackColor = true;
-            this.btnRead.Click += new System.EventHandler(this.btnRead_Click);
-            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(18F, 37F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(917, 726);
+            this.ClientSize = new System.Drawing.Size(929, 756);
             this.Controls.Add(this.panel3);
             this.Font = new System.Drawing.Font("Arial Black", 19.8F, System.Drawing.FontStyle.Bold);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(9, 7, 9, 7);
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Supervisory";
-            this.TopMost = true;
             this.Load += new System.EventHandler(this.frmMain_Load);
+            this.panel3.ResumeLayout(false);
+            this.tabControl1.ResumeLayout(false);
+            this.tabLive.ResumeLayout(false);
             this.splMain.Panel1.ResumeLayout(false);
             this.splMain.Panel2.ResumeLayout(false);
             this.splMain.Panel2.PerformLayout();
@@ -542,52 +654,64 @@
             ((System.ComponentModel.ISupportInitialize)(this.picWaterTank1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWaterTank2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPump)).EndInit();
-            this.panel3.ResumeLayout(false);
+            this.tabHistorical.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chtLevel)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.PictureBox picWaterTank2;
-        private System.Windows.Forms.PictureBox picWaterTank1;
-        private System.Windows.Forms.PictureBox picPump;
-        private System.Windows.Forms.Panel pipe5;
-        private System.Windows.Forms.Panel pipe4;
-        private System.Windows.Forms.Panel pipe6;
-        private System.Windows.Forms.Panel pipe7;
-        private System.Windows.Forms.Panel join9;
-        private System.Windows.Forms.Panel join6;
-        private System.Windows.Forms.Panel join10;
-        private System.Windows.Forms.Panel pipe1;
-        private System.Windows.Forms.Panel join1;
-        private System.Windows.Forms.Panel join2;
-        private System.Windows.Forms.Panel join5;
-        private System.Windows.Forms.Panel pipe3;
-        private System.Windows.Forms.Panel join3;
-        private System.Windows.Forms.Panel pipe2;
-        private System.Windows.Forms.Panel join7;
-        private System.Windows.Forms.Panel join8;
-        private System.Windows.Forms.TextBox txtLevel2;
-        private System.Windows.Forms.TextBox txtLevel1;
-        private ToggleButton btnOperationMode;
-        private CircularButton btnPumpLed;
-        private CircularButton btnOnOff;
-        private System.Windows.Forms.SplitContainer splMain;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.TextBox txtMsg;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabPage tabLive;
+        private System.Windows.Forms.TabPage tabHistorical;
+        private System.Windows.Forms.SplitContainer splMain;
         private System.Windows.Forms.GroupBox grpMenu;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Label label2;
+        private ToggleButton btnOperationMode;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label3;
+        private CircularButton btnOnOff;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnTestDb;
-        private System.Windows.Forms.Button btnRead;
-        private System.Windows.Forms.Button btnWrite;
+        private System.Windows.Forms.Panel join1;
+        private System.Windows.Forms.Panel join2;
+        private System.Windows.Forms.Panel join3;
+        private System.Windows.Forms.Panel join5;
+        private System.Windows.Forms.Panel join6;
+        private System.Windows.Forms.Panel join7;
+        private System.Windows.Forms.Panel join8;
+        private System.Windows.Forms.Panel join9;
+        private System.Windows.Forms.Panel join10;
+        private System.Windows.Forms.Panel pipe1;
+        private System.Windows.Forms.Panel pipe2;
+        private System.Windows.Forms.Panel pipe3;
+        private System.Windows.Forms.Panel pipe4;
+        private System.Windows.Forms.Panel pipe5;
+        private System.Windows.Forms.Panel pipe6;
+        private System.Windows.Forms.Panel pipe7;
+        private System.Windows.Forms.TextBox txtLevel1;
+        private System.Windows.Forms.TextBox txtLevel2;
+        private System.Windows.Forms.PictureBox picWaterTank1;
+        private System.Windows.Forms.PictureBox picWaterTank2;
+        private System.Windows.Forms.PictureBox picPump;
+        private CircularButton btnPumpLed;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chtLevel;
     }
 }
 

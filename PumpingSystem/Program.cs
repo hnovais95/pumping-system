@@ -11,8 +11,8 @@ namespace PumpingSystem
 {
     public static class Program
     {
-        private static IUpdatableForm<Form> _View;
         private static RepositoryService _RepositoryService;
+        private static IUpdatableForm<Form> _FrmMain;
         public static RTDB RTDB;
         //public static UartDriver UartDriver;
         public static ModbusSerialRTUMasterDriver ModbusSerialRTUMasterDriver;
@@ -35,13 +35,13 @@ namespace PumpingSystem
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            _View = new frmMain();
+            _FrmMain = new frmMain();
             _RepositoryService = new RepositoryService(new ProcessChartDao());
-            ViewService = new ViewService(_View, _RepositoryService);
+            ViewService = new ViewService(_FrmMain, _RepositoryService);
             ViewService.InitializeDataPublisherTimer(2000);
             ViewService.InitializeProcessChartUpdaterTimer(5000);
 
-            Application.Run((Form)_View);
+            Application.Run((Form)_FrmMain);
         }
     }
 }

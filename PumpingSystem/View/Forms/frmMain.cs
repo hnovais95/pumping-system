@@ -1,27 +1,21 @@
 ﻿using System;
-using System.Threading;
-using System.Linq;
+using System.Windows.Forms;
 using System.Collections.Generic;
-using System.ComponentModel;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Linq;
 using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.IO;
-using System.Reflection;
 using PumpingSystem.Messages.View;
 using PumpingSystem.Common;
-using PumpingSystem.Server;
-using PumpingSystem.Driver.Uart.Modbus;
 
 namespace PumpingSystem.View
 {
     public partial class frmMain : Form, IUpdatableForm<Form>
     {
-        private MsgDataWaterTank[] _MsgsDataWaterTank = { new MsgDataWaterTank(), new MsgDataWaterTank() };
-        private MsgDataPump _MsgDataPump = new MsgDataPump();
+        private MsgWaterTankData[] _MsgsDataWaterTank = { new MsgWaterTankData(), new MsgWaterTankData() };
+        private MsgPumpData _MsgDataPump = new MsgPumpData();
+        private int _IndexLastRenderedPoint = 0;
 
         public frmMain()
         {
@@ -30,19 +24,14 @@ namespace PumpingSystem.View
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            join1.BringToFront();
-            join7.BringToFront();
-            join8.BringToFront();
-            join10.BringToFront();
-            pipe1.BringToFront();
-            pipe5.BringToFront();
-            pipe6.BringToFront();
-            pipe7.BringToFront();
-            txtLevel1.BringToFront();
-            txtLevel2.BringToFront();
+            chtLevel.ChartAreas[0].AxisY.Maximum = 100;
+            chtLevel.ChartAreas[0].AxisY.Interval = 10;
+            chtLevel.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";            
+            chtLevel.Series["Level1"].Points.AddXY(DateTime.Now, 0);
+            chtLevel.Series["Level2"].Points.AddXY(DateTime.Now, 0);
         }
 
-        public void UpdateWaterTanks(MsgDataWaterTank[] msgs)
+        public void UpdateWaterTanks(MsgWaterTankData[] msgs)
         {
             _MsgsDataWaterTank = msgs;
             UpdateLevel(EnumWaterTank.Tank1, msgs[(int)EnumWaterTank.Tank1].Level);
@@ -83,7 +72,7 @@ namespace PumpingSystem.View
                 this.BeginInvoke(mth);
         }
 
-        public void UpdatePump(MsgDataPump msg)
+        public void UpdatePump(MsgPumpData msg)
         {
             _MsgDataPump = msg;
 
@@ -109,39 +98,40 @@ namespace PumpingSystem.View
 
         private void UpdatePipes(EnumPumpStatus pumpStatus)
         {
-            Application.DoEvents();
-
-            Thread thread = new Thread(new ThreadStart(() =>
+            Task.Factory.StartNew(() =>
             {
                 MethodInvoker mth = (MethodInvoker)delegate ()
                 {
                     try
                     {
-                        List<Control> controls = new List<Control>();
-                        foreach (Control control in this.splMain.Panel2.Controls)
+                        lock (this)
                         {
-                            if (control.Name.StartsWith("pipe"))
+                            List<Control> controls = new List<Control>();
+                            foreach (Control control in this.splMain.Panel2.Controls)
                             {
-                                controls.Add(control);
+                                if (control.Name.StartsWith("pipe"))
+                                {
+                                    controls.Add(control);
+                                }
                             }
-                        }
 
-                        if (pumpStatus == EnumPumpStatus.On)
-                        {
-                            foreach (Control control in controls.OrderBy(p => p.Tag))
+                            if (pumpStatus == EnumPumpStatus.On)
                             {
-                                ((Panel)control).BackColor = Color.FromArgb(0, 168, 243);
-                                this.Refresh();
-                                Thread.Sleep(50);
+                                foreach (Control control in controls.OrderBy(p => p.Tag))
+                                {
+                                    ((Panel)control).BackColor = Color.FromArgb(0, 168, 243);
+                                    this.Refresh();
+                                    Thread.Sleep(50);
+                                }
                             }
-                        }
-                        else
-                        {
-                            foreach (Control control in controls.OrderByDescending(p => p.Tag))
+                            else
                             {
-                                ((Panel)control).BackColor = Color.White;
-                                this.Refresh();
-                                Thread.Sleep(50);
+                                foreach (Control control in controls.OrderByDescending(p => p.Tag))
+                                {
+                                    ((Panel)control).BackColor = Color.White;
+                                    this.Refresh();
+                                    Task.Delay(50);
+                                }
                             }
                         }
                     }
@@ -154,8 +144,35 @@ namespace PumpingSystem.View
                     mth.Invoke();
                 else
                     this.BeginInvoke(mth);
-            }));
-            thread.Start();
+            });
+        }
+
+        public void UpdateChart(MsgChartData msg)
+        {
+            MethodInvoker mth = (MethodInvoker)delegate ()
+            {
+                try
+                {
+                    while (_IndexLastRenderedPoint < msg.Data.Count)
+                    {
+                        ProcessChartData data = msg.Data[_IndexLastRenderedPoint];
+                        if (_IndexLastRenderedPoint >= chtLevel.Series["Level1"].Points.Count)
+                        {
+                            chtLevel.Series["Level1"].Points.AddXY(data.SampleDate, data.Level[0]);
+                            chtLevel.Series["Level2"].Points.AddXY(data.SampleDate, data.Level[1]);
+                        }
+                        ++_IndexLastRenderedPoint;
+                    }
+                }
+                catch (Exception e)
+                {
+                    txtMsg.Text = e.Message;
+                }
+            };
+            if (!this.IsHandleCreated)
+                mth.Invoke();
+            else
+                this.BeginInvoke(mth);
         }
 
         private void btnOnOff_Click(object sender, EventArgs e)
@@ -205,7 +222,7 @@ namespace PumpingSystem.View
 
                 txtMsg.Text = _MsgDataPump.OperationMode == EnumOperationMode.Automatic ? "Modo de operação automático acionado." : "Modo de operação manual acionado.";
 
-                UpdatePump(_MsgDataPump);
+                btnOperationMode.IsOn = _MsgDataPump.OperationMode == EnumOperationMode.Automatic ? true : false;
                 Program.ViewService.SendPumpData(_MsgDataPump);
             }
             catch (Exception exc)
@@ -218,19 +235,9 @@ namespace PumpingSystem.View
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Program.ViewService.UpdateProcessChart(null, null);
-        }
-
-        private void btnWrite_Click(object sender, EventArgs e)
-        {
-            //ModbusSerialRTUMasterDriver.ModbusSerialRtuMasterWriteRegisters();
-        }
-
-        private void btnRead_Click(object sender, EventArgs e)
-        {
-            //ModbusSerialRTUMasterDriver.ModbusSerialRtuMasterReadHoldingRegisters();
+            this.Close();
         }
     }
 }

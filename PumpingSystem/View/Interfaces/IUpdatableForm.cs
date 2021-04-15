@@ -6,7 +6,8 @@ namespace PumpingSystem.View
 {
     public interface IUpdatableForm <T> where T : Form
     {
-        void UpdateWaterTanks(MsgDataWaterTank[] msgs);
-        void UpdatePump(MsgDataPump msg);
+        void UpdateWaterTanks(MsgWaterTankData[] msgs);
+        void UpdatePump(MsgPumpData msg);
+        void UpdateChart(MsgChartData msg);
     }
 }

@@ -155,7 +155,7 @@ namespace PumpingSystem.Driver.Uart.Modbus
             switch (msg.GetID())
             {
                 case 200:
-                    return 2;
+                    return 0;
                 case 201:
                     return 2;
                 default:
