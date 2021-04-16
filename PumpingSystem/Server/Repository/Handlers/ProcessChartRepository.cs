@@ -9,17 +9,17 @@ using PumpingSystem.Common.Utilities;
 
 namespace PumpingSystem.Server.Repository
 {
-    public class ProcessChartDao
+    public class ProcessChartRepository : IProcessChartRepository
     {
         private string _ConnectionString;
 
-        public ProcessChartDao() : this(Properties.Resources.ConnectionString) { }
-        public ProcessChartDao(string connectionString)
+        public ProcessChartRepository() : this(Properties.Resources.ConnectionString) { }
+        public ProcessChartRepository(string connectionString)
         {
             _ConnectionString = connectionString;
         }
 
-        public void Insert(ProcessChart processChart, int timeout)
+        public void Insert(object processChart, int timeout)
         {
             using (var conn = new SqlConnection(_ConnectionString))
             {
@@ -36,7 +36,7 @@ namespace PumpingSystem.Server.Repository
                         sql.Append(", @processchart");
                         sql.Append(")");
 
-                        cmd.Parameters.AddWithValue("@processchart", Utilities.Compress(Utilities.Serialize(processChart)));
+                        cmd.Parameters.AddWithValue("@processchart", Utilities.Compress(Utilities.Serialize((ProcessChart)processChart)));
 
                         cmd.Connection = conn;
                         cmd.CommandTimeout = timeout;
@@ -50,7 +50,7 @@ namespace PumpingSystem.Server.Repository
             }
         }
 
-        public List<ProcessChart> GetByPeriod(DateTime startDate, DateTime endDate, int timeout)
+        public List<object> GetByPeriod(DateTime startDate, DateTime endDate, int timeout)
         {
             using (SqlConnection conn = new SqlConnection(_ConnectionString))
             {
@@ -73,7 +73,7 @@ namespace PumpingSystem.Server.Repository
 
                         using (SqlDataReader reader = cmd.ExecuteReader())
                         {
-                            List<ProcessChart> processCharts = new List<ProcessChart>();
+                            List<object> processCharts = new List<object>();
                             while (reader.Read())
                             {
                                 if (!reader.IsDBNull(0)) processCharts.Add(GetProcessoChart(reader));

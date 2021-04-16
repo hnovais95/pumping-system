@@ -5,13 +5,13 @@ using System.Data.SqlClient;
 
 namespace PumpingSystem.Server.Repository
 {
-    public class AuthenticationDao
+    public class AuthenticationRepository : IAuthenticationRepository
     {
         private string _ConnectionString;
 
-        public AuthenticationDao() : this(Properties.Resources.ConnectionString) { }
+        public AuthenticationRepository() : this(Properties.Resources.ConnectionString) { }
 
-        public AuthenticationDao(string connectionString)
+        public AuthenticationRepository(string connectionString)
         {
             _ConnectionString = connectionString;
         }

@@ -15,7 +15,7 @@ namespace PumpingSystem.Server
         {
             _Status = EnumPumpStatus.Off;
             _OperationMode = EnumOperationMode.Automatic;
-            Changed = false;
+            this.Changed = false;
         }
 
         public EnumPumpStatus Status { get => _Status; }

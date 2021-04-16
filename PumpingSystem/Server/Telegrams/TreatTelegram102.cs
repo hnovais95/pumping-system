@@ -1,6 +1,7 @@
 ﻿using System;
 using PumpingSystem.Common;
 using PumpingSystem.Messages.Uart;
+using PumpingSystem.Server.Repository;
 
 namespace PumpingSystem.Server
 {
@@ -11,8 +12,10 @@ namespace PumpingSystem.Server
             try
             {
                 MsgTelegram102 tel = (MsgTelegram102)msg;
-                WaterTank[] waterTanks = Program.RTDB.Tanks;
 
+                LocalRepository localRepository = LocalRepository.GetInstance();
+
+                WaterTank[] waterTanks = localRepository.Tanks;
                 waterTanks[(int)EnumWaterTank.Tank1].MinLevel = tel.MinLevelTank1;
                 waterTanks[(int)EnumWaterTank.Tank2].MinLevel = tel.MinLevelTank2;
             }

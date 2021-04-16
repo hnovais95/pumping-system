@@ -36,7 +36,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.panel3 = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabLive = new System.Windows.Forms.TabPage();
+            this.tabSynoptic = new System.Windows.Forms.TabPage();
             this.splMain = new System.Windows.Forms.SplitContainer();
             this.grpMenu = new System.Windows.Forms.GroupBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -65,7 +65,15 @@
             this.picWaterTank1 = new System.Windows.Forms.PictureBox();
             this.picWaterTank2 = new System.Windows.Forms.PictureBox();
             this.picPump = new System.Windows.Forms.PictureBox();
-            this.tabHistorical = new System.Windows.Forms.TabPage();
+            this.tabChart = new System.Windows.Forms.TabPage();
+            this.grpDateRange = new System.Windows.Forms.GroupBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.dtpEndDate = new System.Windows.Forms.DateTimePicker();
+            this.lblEndDate = new System.Windows.Forms.Label();
+            this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
+            this.lblStartDate = new System.Windows.Forms.Label();
+            this.grpRealtime = new System.Windows.Forms.GroupBox();
+            this.chtLevel = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtMsg = new System.Windows.Forms.TextBox();
             this.panel5 = new System.Windows.Forms.Panel();
@@ -75,13 +83,13 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.chtLevel = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.btnOperationMode = new PumpingSystem.View.ToggleButton();
             this.btnOnOff = new PumpingSystem.View.CircularButton();
             this.btnPumpLed = new PumpingSystem.View.CircularButton();
+            this.btnRealtime = new PumpingSystem.View.ToggleButton();
             this.panel3.SuspendLayout();
             this.tabControl1.SuspendLayout();
-            this.tabLive.SuspendLayout();
+            this.tabSynoptic.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splMain)).BeginInit();
             this.splMain.Panel1.SuspendLayout();
             this.splMain.Panel2.SuspendLayout();
@@ -92,11 +100,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.picWaterTank1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWaterTank2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPump)).BeginInit();
-            this.tabHistorical.SuspendLayout();
+            this.tabChart.SuspendLayout();
+            this.grpDateRange.SuspendLayout();
+            this.grpRealtime.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.chtLevel)).BeginInit();
             this.panel4.SuspendLayout();
             this.panel5.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chtLevel)).BeginInit();
             this.SuspendLayout();
             // 
             // panel3
@@ -112,8 +122,8 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabLive);
-            this.tabControl1.Controls.Add(this.tabHistorical);
+            this.tabControl1.Controls.Add(this.tabSynoptic);
+            this.tabControl1.Controls.Add(this.tabChart);
             this.tabControl1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabControl1.Location = new System.Drawing.Point(0, 40);
             this.tabControl1.Name = "tabControl1";
@@ -121,16 +131,16 @@
             this.tabControl1.Size = new System.Drawing.Size(929, 683);
             this.tabControl1.TabIndex = 1;
             // 
-            // tabLive
+            // tabSynoptic
             // 
-            this.tabLive.BackColor = System.Drawing.SystemColors.Control;
-            this.tabLive.Controls.Add(this.splMain);
-            this.tabLive.Location = new System.Drawing.Point(4, 25);
-            this.tabLive.Name = "tabLive";
-            this.tabLive.Padding = new System.Windows.Forms.Padding(3);
-            this.tabLive.Size = new System.Drawing.Size(921, 654);
-            this.tabLive.TabIndex = 0;
-            this.tabLive.Text = "Live";
+            this.tabSynoptic.BackColor = System.Drawing.SystemColors.Control;
+            this.tabSynoptic.Controls.Add(this.splMain);
+            this.tabSynoptic.Location = new System.Drawing.Point(4, 25);
+            this.tabSynoptic.Name = "tabSynoptic";
+            this.tabSynoptic.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSynoptic.Size = new System.Drawing.Size(921, 654);
+            this.tabSynoptic.TabIndex = 0;
+            this.tabSynoptic.Text = "Synoptic";
             // 
             // splMain
             // 
@@ -450,16 +460,135 @@
             this.picPump.TabIndex = 2;
             this.picPump.TabStop = false;
             // 
-            // tabHistorical
+            // tabChart
             // 
-            this.tabHistorical.BackColor = System.Drawing.SystemColors.Control;
-            this.tabHistorical.Controls.Add(this.chtLevel);
-            this.tabHistorical.Location = new System.Drawing.Point(4, 25);
-            this.tabHistorical.Name = "tabHistorical";
-            this.tabHistorical.Padding = new System.Windows.Forms.Padding(3);
-            this.tabHistorical.Size = new System.Drawing.Size(921, 654);
-            this.tabHistorical.TabIndex = 1;
-            this.tabHistorical.Text = "Historical";
+            this.tabChart.BackColor = System.Drawing.SystemColors.Control;
+            this.tabChart.Controls.Add(this.grpDateRange);
+            this.tabChart.Controls.Add(this.grpRealtime);
+            this.tabChart.Controls.Add(this.chtLevel);
+            this.tabChart.Location = new System.Drawing.Point(4, 25);
+            this.tabChart.Name = "tabChart";
+            this.tabChart.Padding = new System.Windows.Forms.Padding(3);
+            this.tabChart.Size = new System.Drawing.Size(921, 654);
+            this.tabChart.TabIndex = 1;
+            this.tabChart.Text = "Chart";
+            // 
+            // grpDateRange
+            // 
+            this.grpDateRange.Controls.Add(this.btnRefresh);
+            this.grpDateRange.Controls.Add(this.dtpEndDate);
+            this.grpDateRange.Controls.Add(this.lblEndDate);
+            this.grpDateRange.Controls.Add(this.dtpStartDate);
+            this.grpDateRange.Controls.Add(this.lblStartDate);
+            this.grpDateRange.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpDateRange.Location = new System.Drawing.Point(156, 579);
+            this.grpDateRange.Name = "grpDateRange";
+            this.grpDateRange.Size = new System.Drawing.Size(494, 69);
+            this.grpDateRange.TabIndex = 2;
+            this.grpDateRange.TabStop = false;
+            this.grpDateRange.Text = "Date range";
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackgroundImage = global::PumpingSystem.Properties.Resources.Refresh;
+            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnRefresh.Location = new System.Drawing.Point(438, 24);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(30, 30);
+            this.btnRefresh.TabIndex = 3;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // dtpEndDate
+            // 
+            this.dtpEndDate.CustomFormat = "dd/mm/yy HH:mm";
+            this.dtpEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpEndDate.Location = new System.Drawing.Point(268, 28);
+            this.dtpEndDate.Name = "dtpEndDate";
+            this.dtpEndDate.Size = new System.Drawing.Size(143, 23);
+            this.dtpEndDate.TabIndex = 1;
+            // 
+            // lblEndDate
+            // 
+            this.lblEndDate.AutoSize = true;
+            this.lblEndDate.Location = new System.Drawing.Point(226, 31);
+            this.lblEndDate.Name = "lblEndDate";
+            this.lblEndDate.Size = new System.Drawing.Size(36, 16);
+            this.lblEndDate.TabIndex = 0;
+            this.lblEndDate.Text = "End:";
+            // 
+            // dtpStartDate
+            // 
+            this.dtpStartDate.CustomFormat = "dd/mm/yy HH:mm";
+            this.dtpStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpStartDate.Location = new System.Drawing.Point(59, 28);
+            this.dtpStartDate.Name = "dtpStartDate";
+            this.dtpStartDate.Size = new System.Drawing.Size(143, 23);
+            this.dtpStartDate.TabIndex = 1;
+            // 
+            // lblStartDate
+            // 
+            this.lblStartDate.AutoSize = true;
+            this.lblStartDate.Location = new System.Drawing.Point(6, 31);
+            this.lblStartDate.Name = "lblStartDate";
+            this.lblStartDate.Size = new System.Drawing.Size(47, 16);
+            this.lblStartDate.TabIndex = 0;
+            this.lblStartDate.Text = "Start:";
+            // 
+            // grpRealtime
+            // 
+            this.grpRealtime.Controls.Add(this.btnRealtime);
+            this.grpRealtime.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grpRealtime.Location = new System.Drawing.Point(22, 578);
+            this.grpRealtime.Name = "grpRealtime";
+            this.grpRealtime.Size = new System.Drawing.Size(112, 70);
+            this.grpRealtime.TabIndex = 1;
+            this.grpRealtime.TabStop = false;
+            this.grpRealtime.Text = "Real-time";
+            // 
+            // chtLevel
+            // 
+            this.chtLevel.BackColor = System.Drawing.SystemColors.MenuHighlight;
+            this.chtLevel.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter;
+            this.chtLevel.BackSecondaryColor = System.Drawing.Color.White;
+            this.chtLevel.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
+            chartArea1.AxisX.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Horizontal;
+            chartArea1.AxisX.Title = "Timestamp (HH:mm:ss)";
+            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.AxisY.Title = "Level (%)";
+            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            chartArea1.Name = "ChartArea1";
+            this.chtLevel.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chtLevel.Legends.Add(legend1);
+            this.chtLevel.Location = new System.Drawing.Point(22, 21);
+            this.chtLevel.Name = "chtLevel";
+            this.chtLevel.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            series1.BorderWidth = 2;
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Color = System.Drawing.SystemColors.MenuHighlight;
+            series1.Legend = "Legend1";
+            series1.LegendText = "Level - Water Tank 1";
+            series1.Name = "Level1";
+            series1.YValuesPerPoint = 2;
+            series2.BorderWidth = 2;
+            series2.ChartArea = "ChartArea1";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Color = System.Drawing.Color.Red;
+            series2.Legend = "Legend1";
+            series2.LegendText = "Level - Water Tank 2";
+            series2.Name = "Level2";
+            this.chtLevel.Series.Add(series1);
+            this.chtLevel.Series.Add(series2);
+            this.chtLevel.Size = new System.Drawing.Size(874, 445);
+            this.chtLevel.TabIndex = 0;
+            this.chtLevel.Text = "chart1";
+            title1.BackColor = System.Drawing.Color.White;
+            title1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            title1.Name = "Title1";
+            title1.Text = "Water Tank Level";
+            this.chtLevel.Titles.Add(title1);
             // 
             // panel4
             // 
@@ -538,50 +667,6 @@
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "About";
             // 
-            // chtLevel
-            // 
-            this.chtLevel.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.chtLevel.BackGradientStyle = System.Windows.Forms.DataVisualization.Charting.GradientStyle.HorizontalCenter;
-            this.chtLevel.BackSecondaryColor = System.Drawing.Color.White;
-            this.chtLevel.BorderlineDashStyle = System.Windows.Forms.DataVisualization.Charting.ChartDashStyle.Solid;
-            chartArea1.AxisX.TextOrientation = System.Windows.Forms.DataVisualization.Charting.TextOrientation.Horizontal;
-            chartArea1.AxisX.Title = "Timestamp (HH:mm:ss)";
-            chartArea1.AxisX.TitleFont = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.AxisY.Title = "Level (%)";
-            chartArea1.AxisY.TitleFont = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            chartArea1.Name = "ChartArea1";
-            this.chtLevel.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chtLevel.Legends.Add(legend1);
-            this.chtLevel.Location = new System.Drawing.Point(96, 71);
-            this.chtLevel.Name = "chtLevel";
-            this.chtLevel.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            series1.BorderWidth = 2;
-            series1.ChartArea = "ChartArea1";
-            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series1.Color = System.Drawing.SystemColors.MenuHighlight;
-            series1.Legend = "Legend1";
-            series1.LegendText = "Level - Water Tank 1";
-            series1.Name = "Level1";
-            series1.YValuesPerPoint = 2;
-            series2.BorderWidth = 2;
-            series2.ChartArea = "ChartArea1";
-            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Spline;
-            series2.Color = System.Drawing.Color.Red;
-            series2.Legend = "Legend1";
-            series2.LegendText = "Level - Water Tank 2";
-            series2.Name = "Level2";
-            this.chtLevel.Series.Add(series1);
-            this.chtLevel.Series.Add(series2);
-            this.chtLevel.Size = new System.Drawing.Size(712, 379);
-            this.chtLevel.TabIndex = 0;
-            this.chtLevel.Text = "chart1";
-            title1.BackColor = System.Drawing.Color.White;
-            title1.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            title1.Name = "Title1";
-            title1.Text = "Water Tank Level";
-            this.chtLevel.Titles.Add(title1);
-            // 
             // btnOperationMode
             // 
             this.btnOperationMode.BorderColor = System.Drawing.Color.LightGray;
@@ -624,6 +709,23 @@
             this.btnPumpLed.TabIndex = 7;
             this.btnPumpLed.UseVisualStyleBackColor = false;
             // 
+            // btnRealtime
+            // 
+            this.btnRealtime.BorderColor = System.Drawing.Color.LightGray;
+            this.btnRealtime.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnRealtime.ForeColor = System.Drawing.Color.White;
+            this.btnRealtime.IsOn = true;
+            this.btnRealtime.Location = new System.Drawing.Point(27, 20);
+            this.btnRealtime.Name = "btnRealtime";
+            this.btnRealtime.OffColor = System.Drawing.Color.DarkGray;
+            this.btnRealtime.OffText = "";
+            this.btnRealtime.OnColor = System.Drawing.Color.Lime;
+            this.btnRealtime.OnText = "";
+            this.btnRealtime.Size = new System.Drawing.Size(60, 35);
+            this.btnRealtime.TabIndex = 7;
+            this.btnRealtime.TextEnabled = true;
+            this.btnRealtime.Click += new System.EventHandler(this.btnRealtime_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(18F, 37F);
@@ -631,18 +733,18 @@
             this.ClientSize = new System.Drawing.Size(929, 756);
             this.Controls.Add(this.panel3);
             this.Font = new System.Drawing.Font("Arial Black", 19.8F, System.Drawing.FontStyle.Bold);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(9, 7, 9, 7);
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Supervisory";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.panel3.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);
-            this.tabLive.ResumeLayout(false);
+            this.tabSynoptic.ResumeLayout(false);
             this.splMain.Panel1.ResumeLayout(false);
             this.splMain.Panel2.ResumeLayout(false);
             this.splMain.Panel2.PerformLayout();
@@ -654,14 +756,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.picWaterTank1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picWaterTank2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPump)).EndInit();
-            this.tabHistorical.ResumeLayout(false);
+            this.tabChart.ResumeLayout(false);
+            this.grpDateRange.ResumeLayout(false);
+            this.grpDateRange.PerformLayout();
+            this.grpRealtime.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.chtLevel)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chtLevel)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -678,8 +783,8 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabLive;
-        private System.Windows.Forms.TabPage tabHistorical;
+        private System.Windows.Forms.TabPage tabSynoptic;
+        private System.Windows.Forms.TabPage tabChart;
         private System.Windows.Forms.SplitContainer splMain;
         private System.Windows.Forms.GroupBox grpMenu;
         private System.Windows.Forms.Panel panel2;
@@ -712,6 +817,14 @@
         private System.Windows.Forms.PictureBox picPump;
         private CircularButton btnPumpLed;
         private System.Windows.Forms.DataVisualization.Charting.Chart chtLevel;
+        private System.Windows.Forms.GroupBox grpDateRange;
+        private System.Windows.Forms.GroupBox grpRealtime;
+        private ToggleButton btnRealtime;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.DateTimePicker dtpEndDate;
+        private System.Windows.Forms.Label lblEndDate;
+        private System.Windows.Forms.DateTimePicker dtpStartDate;
+        private System.Windows.Forms.Label lblStartDate;
     }
 }
 

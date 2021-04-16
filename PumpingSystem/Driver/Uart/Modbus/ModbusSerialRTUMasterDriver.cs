@@ -41,7 +41,11 @@ namespace PumpingSystem.Driver.Uart.Modbus
             _SerialPort.Parity = Parity.None;
             _SerialPort.StopBits = StopBits.One;
             _SerialPort.Open();
+            Loop();            
+        }
 
+        private void Loop()
+        {
             Task.Run(async delegate
             {
                 try
@@ -64,7 +68,7 @@ namespace PumpingSystem.Driver.Uart.Modbus
 
                         _Registers = registers;
 
-                        await Task.Delay(2000);
+                        await Task.Delay(1000);
                     }
                 }
                 catch (Exception e)

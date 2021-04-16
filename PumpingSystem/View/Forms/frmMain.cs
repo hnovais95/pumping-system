@@ -11,7 +11,7 @@ using PumpingSystem.Common;
 
 namespace PumpingSystem.View
 {
-    public partial class frmMain : Form, IUpdatableForm<Form>
+    public partial class frmMain : Form
     {
         private MsgWaterTankData[] _MsgsDataWaterTank = { new MsgWaterTankData(), new MsgWaterTankData() };
         private MsgPumpData _MsgDataPump = new MsgPumpData();
@@ -26,9 +26,7 @@ namespace PumpingSystem.View
         {
             chtLevel.ChartAreas[0].AxisY.Maximum = 100;
             chtLevel.ChartAreas[0].AxisY.Interval = 10;
-            chtLevel.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";            
-            chtLevel.Series["Level1"].Points.AddXY(DateTime.Now, 0);
-            chtLevel.Series["Level2"].Points.AddXY(DateTime.Now, 0);
+            chtLevel.ChartAreas[0].AxisX.LabelStyle.Format = "HH:mm:ss";
         }
 
         public void UpdateWaterTanks(MsgWaterTankData[] msgs)
@@ -110,9 +108,7 @@ namespace PumpingSystem.View
                             foreach (Control control in this.splMain.Panel2.Controls)
                             {
                                 if (control.Name.StartsWith("pipe"))
-                                {
                                     controls.Add(control);
-                                }
                             }
 
                             if (pumpStatus == EnumPumpStatus.On)
@@ -149,10 +145,15 @@ namespace PumpingSystem.View
 
         public void UpdateChart(MsgChartData msg)
         {
+            if (!btnRealtime.IsOn) return;
+
             MethodInvoker mth = (MethodInvoker)delegate ()
             {
                 try
                 {
+                    if (_IndexLastRenderedPoint > msg.Data.Count)
+                        ClearChart();
+
                     while (_IndexLastRenderedPoint < msg.Data.Count)
                     {
                         ProcessChartData data = msg.Data[_IndexLastRenderedPoint];
@@ -181,19 +182,23 @@ namespace PumpingSystem.View
             {
                 Cursor = Cursors.WaitCursor;
 
-                if (_MsgDataPump.StatusPump == EnumPumpStatus.On)
+                if (_MsgDataPump.OperationMode == EnumOperationMode.Manual)
                 {
-                    _MsgDataPump.StatusPump = EnumPumpStatus.Off;
+
+                    if (_MsgDataPump.StatusPump == EnumPumpStatus.On)
+                        _MsgDataPump.StatusPump = EnumPumpStatus.Off;
+                    else
+                        _MsgDataPump.StatusPump = EnumPumpStatus.On;
+
+                    txtMsg.Text = _MsgDataPump.StatusPump == EnumPumpStatus.On ? "Bomba acionada." : "Bomba desligada.";
+
+                    UpdatePump(_MsgDataPump);
+                    Program.ApplicationService.SendPumpData(_MsgDataPump);
                 }
                 else
                 {
-                    _MsgDataPump.StatusPump = EnumPumpStatus.On;
+                    MessageBox.Show("Não é possível ligar/desligar a bomba manualmente se o modo de operação automático estiver habilitado.", "Operação inválida", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
-
-                txtMsg.Text = _MsgDataPump.StatusPump == EnumPumpStatus.On ? "Bomba acionada." : "Bomba desligada.";
-
-                UpdatePump(_MsgDataPump);
-                Program.ViewService.SendPumpData(_MsgDataPump);
             }
             catch (Exception exc)
             {
@@ -212,18 +217,14 @@ namespace PumpingSystem.View
                 Cursor = Cursors.WaitCursor;
 
                 if (_MsgDataPump.OperationMode == EnumOperationMode.Automatic)
-                {
                     _MsgDataPump.OperationMode = EnumOperationMode.Manual;
-                }
                 else
-                {
                     _MsgDataPump.OperationMode = EnumOperationMode.Automatic;
-                }
 
                 txtMsg.Text = _MsgDataPump.OperationMode == EnumOperationMode.Automatic ? "Modo de operação automático acionado." : "Modo de operação manual acionado.";
 
                 btnOperationMode.IsOn = _MsgDataPump.OperationMode == EnumOperationMode.Automatic ? true : false;
-                Program.ViewService.SendPumpData(_MsgDataPump);
+                Program.ApplicationService.SendPumpData(_MsgDataPump);
             }
             catch (Exception exc)
             {
@@ -238,6 +239,55 @@ namespace PumpingSystem.View
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            btnRealtime.IsOn = false;
+
+            DateTime startDate = dtpStartDate.Value;
+            DateTime endDate = dtpEndDate.Value;
+
+            List<ProcessChart> processCharts = Program.ApplicationService.GetProcessCharts(startDate, endDate)?.ToList();
+            List<ProcessChartData> dataList = new List<ProcessChartData>();
+            processCharts?.ForEach(p => dataList.AddRange(p.Data));
+
+            ClearChart();
+
+            if (dataList.Count > 0)
+            {
+
+                foreach (ProcessChartData data in dataList.OrderBy(p => p.SampleDate))
+                {
+                    chtLevel.Series["Level1"].Points.AddXY(data.SampleDate, data.Level[0]);
+                    chtLevel.Series["Level2"].Points.AddXY(data.SampleDate, data.Level[1]);
+                }
+
+                txtMsg.Text = "Registros carregados.";
+            }
+            else
+            {
+                txtMsg.Text = "Não foram encontrados registros no período solicitado.";
+            }
+        }
+
+        private void btnSaveChart_Click(object sender, EventArgs e)
+        {
+            Program.ApplicationService.SaveProcessChart(null, null);
+        }
+
+        private void btnRealtime_Click(object sender, EventArgs e)
+        {
+            ClearChart();
+            txtMsg.Text = String.Format("Modo exibição {0} habilitado.", btnRealtime.IsOn ? "em tempo real" : "histórico");
+        }
+
+        private  void ClearChart()
+        {
+            _IndexLastRenderedPoint = 0;
+
+            foreach (var serie in chtLevel.Series)
+                serie.Points.Clear();
         }
     }
 }

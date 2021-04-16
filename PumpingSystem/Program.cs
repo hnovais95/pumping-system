@@ -11,13 +11,12 @@ namespace PumpingSystem
 {
     public static class Program
     {
-        private static RepositoryService _RepositoryService;
-        private static IUpdatableForm<Form> _FrmMain;
-        public static RTDB RTDB;
         //public static UartDriver UartDriver;
         public static ModbusSerialRTUMasterDriver ModbusSerialRTUMasterDriver;
         public static UartService UartService;
-        public static ViewService ViewService;
+        private static RepositoryService _RepositoryService;
+        public static ApplicationService ApplicationService;
+        public static frmMain FrmMain;
 
         /// <summary>
         ///  The main entry point for the application.
@@ -25,23 +24,21 @@ namespace PumpingSystem
         [STAThread]
         static void Main()
         {
-            RTDB = new RTDB();
-
-            UartService = new UartService();
-            //UartDriver = new UartDriver(new SerialPort());
-            ModbusSerialRTUMasterDriver = new ModbusSerialRTUMasterDriver(new SerialPort());
-            ModbusSerialRTUMasterDriver.Initialize();
-
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            _FrmMain = new frmMain();
-            _RepositoryService = new RepositoryService(new ProcessChartDao());
-            ViewService = new ViewService(_FrmMain, _RepositoryService);
-            ViewService.InitializeDataPublisherTimer(2000);
-            ViewService.InitializeProcessChartUpdaterTimer(5000);
+            //UartDriver = new UartDriver(new SerialPort());
+            ModbusSerialRTUMasterDriver = new ModbusSerialRTUMasterDriver(new SerialPort());
+            ModbusSerialRTUMasterDriver.Initialize();
+            UartService = new UartService();
+            _RepositoryService = new RepositoryService(new ProcessChartRepository(), new AuthenticationRepository());
+            FrmMain = new frmMain();
+            ApplicationService = new ApplicationService(_RepositoryService);
+            ApplicationService.InitializeDataPublishing(1000);
+            ApplicationService.InitializeProcessChartUpdate(1000);
+            ApplicationService.InitializeProcessChartStoragerTimer(30000);
 
-            Application.Run((Form)_FrmMain);
+            Application.Run((Form)FrmMain);
         }
     }
 }

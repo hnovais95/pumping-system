@@ -1,6 +1,7 @@
 ﻿using System;
-using PumpingSystem.Common;
 using PumpingSystem.Messages.Uart;
+using PumpingSystem.Common;
+using PumpingSystem.Server.Repository;
 
 namespace PumpingSystem.Server
 {
@@ -11,23 +12,24 @@ namespace PumpingSystem.Server
             try
             {
                 MsgTelegram100 tel = (MsgTelegram100)msg;
-                Pump pump = Program.RTDB.Pump;
 
-                if (tel.StatusPump != (int)pump.Status)
+                LocalRepository localRepository = LocalRepository.GetInstance();
+
+                if (tel.StatusPump != (int)localRepository.Pump.Status)
                 {
-                    if (tel.StatusPump == 1) 
-                        pump.TurnOnPump();
-                    else 
-                        pump.TurnOffPump();
+                    if (tel.StatusPump == 1)
+                        localRepository.Pump.TurnOnPump();
+                    else
+                        localRepository.Pump.TurnOffPump();
                 }
 
                 if (tel.OperationMode == (int)EnumOperationMode.Automatic)
                 {
-                    Program.RTDB.Pump.OperationMode = EnumOperationMode.Automatic;
+                    localRepository.Pump.OperationMode = EnumOperationMode.Automatic;
                 }
                 else
                 {
-                    Program.RTDB.Pump.OperationMode = EnumOperationMode.Manual;
+                    localRepository.Pump.OperationMode = EnumOperationMode.Manual;
                 }
             }
             catch (Exception e)
