@@ -11,7 +11,7 @@ namespace PumpingSystem.Driver.Uart.Modbus
     {
         private SerialPort _SerialPort;
         private const byte _SlaveId = 1;
-        private const ushort _StartAddress = 40001;
+        private const ushort _StartAddress = 0;
         private ushort _NumberOfPoints = 8;
         private ModbusSerialMaster _Master;
         private ushort[] _Registers;
@@ -82,37 +82,18 @@ namespace PumpingSystem.Driver.Uart.Modbus
         {
             try
             {
-                ushort increment = 0;
-                ushort[] data = null;
-
-                switch (msg.GetID())
+                short startAddress = GetStartAddress(msg);
+                if (startAddress != -1)
                 {
-                    case 200:
-
-                        if (GetIncrementAddress(msg) != -1)
+                    var propsInfo = msg.GetType().GetProperties();
+                    if ((propsInfo != null) && (propsInfo.Length > 0))
+                    {
+                        for (int i = 0; i < propsInfo.Length; i++)
                         {
-                            increment = (ushort)GetIncrementAddress(msg);
-
-                            MsgTelegram200 tel = (MsgTelegram200)msg;
-
-                            var propsInfo = tel.GetType().GetProperties();
-                            if ((propsInfo != null) && (propsInfo.Length > 0))
-                            {
-                                data = new ushort[propsInfo.Length];
-                                for (int i = 0; i < propsInfo.Length; i++)
-                                {
-                                    data[i] = Convert.ToUInt16(propsInfo[i].GetValue(msg, null));
-                                }
-                            }
-
+                            ushort data = Convert.ToUInt16(propsInfo[i].GetValue(msg, null));
+                            _Master.WriteSingleRegister(_SlaveId, (ushort)(startAddress + i), data);
                         }
-
-                        break;
-                }
-
-                if ((data != null) && (data.Length > 0))
-                {
-                    _Master.WriteMultipleRegisters(_SlaveId, (ushort)(_StartAddress + increment), data/*_Registers*/);
+                    }
                 }
             }
             catch (Exception e)
@@ -154,7 +135,7 @@ namespace PumpingSystem.Driver.Uart.Modbus
             return msg;
         }
         
-        private short GetIncrementAddress(IMsgUart msg)
+        private short GetStartAddress(IMsgUart msg)
         {
             switch (msg.GetID())
             {
