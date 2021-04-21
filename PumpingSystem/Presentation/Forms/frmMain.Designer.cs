@@ -1,4 +1,4 @@
-﻿namespace PumpingSystem.View
+﻿namespace PumpingSystem.Presentation
 {
     partial class frmMain
     {
@@ -47,10 +47,10 @@
             this.nudMinLevelTank2 = new System.Windows.Forms.NumericUpDown();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnOperationMode = new PumpingSystem.View.ToggleButton();
+            this.btnOperationMode = new PumpingSystem.Presentation.ToggleButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnOnOff = new PumpingSystem.View.CircularButton();
+            this.btnOnOff = new PumpingSystem.Presentation.CircularButton();
             this.label1 = new System.Windows.Forms.Label();
             this.join1 = new System.Windows.Forms.Panel();
             this.join2 = new System.Windows.Forms.Panel();
@@ -73,7 +73,7 @@
             this.picWaterTank1 = new System.Windows.Forms.PictureBox();
             this.picWaterTank2 = new System.Windows.Forms.PictureBox();
             this.picPump = new System.Windows.Forms.PictureBox();
-            this.btnPumpLed = new PumpingSystem.View.CircularButton();
+            this.btnPumpLed = new PumpingSystem.Presentation.CircularButton();
             this.tabChart = new System.Windows.Forms.TabPage();
             this.grpDateRange = new System.Windows.Forms.GroupBox();
             this.btnRefresh = new System.Windows.Forms.Button();
@@ -82,7 +82,7 @@
             this.dtpStartDate = new System.Windows.Forms.DateTimePicker();
             this.lblStartDate = new System.Windows.Forms.Label();
             this.grpRealtime = new System.Windows.Forms.GroupBox();
-            this.btnRealtime = new PumpingSystem.View.ToggleButton();
+            this.btnRealtime = new PumpingSystem.Presentation.ToggleButton();
             this.chtLevel = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtMsg = new System.Windows.Forms.TextBox();
@@ -819,6 +819,7 @@
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Supervisory";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmMain_FormClosed);
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.panel3.ResumeLayout(false);
             this.tabControl1.ResumeLayout(false);

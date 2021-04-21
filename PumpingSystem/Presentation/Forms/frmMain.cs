@@ -10,7 +10,7 @@ using PumpingSystem.Messages.Presentation;
 using PumpingSystem.Shared;
 using PumpingSystem.Shared.Utilities;
 
-namespace PumpingSystem.View
+namespace PumpingSystem.Presentation
 {
     public partial class frmMain : Form
     {
@@ -256,7 +256,7 @@ namespace PumpingSystem.View
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            Application.Exit();
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -314,6 +314,11 @@ namespace PumpingSystem.View
             _MsgsWaterTankData[(int)WaterTankPosition.Tank2].MinLevel = (int)nudMinLevelTank2.Value;
 
             Program.ApplicationService.SendDataWaterTank(_MsgsWaterTankData);
+        }
+
+        private void frmMain_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

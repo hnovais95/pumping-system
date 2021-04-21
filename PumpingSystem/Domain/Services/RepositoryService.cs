@@ -37,12 +37,12 @@ namespace PumpingSystem.Domain
            return processCharts;
         }
 
-        public void InsertUser(string username, string password, int timeout)
+        public void InsertUser(string username, string password)
         {
             _AuthenticationRepository.Insert(username, password, 5);
         }
 
-        public bool CheckIfItExistsByUsernameAndPassword(string username, string password, int timeout)
+        public bool CheckIfItExistsByUsernameAndPassword(string username, string password)
         {
             return _AuthenticationRepository.CheckIfItExistsByUsernameAndPassword(username, password, 5);
         }

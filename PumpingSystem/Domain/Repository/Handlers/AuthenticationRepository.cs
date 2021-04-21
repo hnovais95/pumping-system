@@ -25,7 +25,7 @@ namespace PumpingSystem.Domain.Repository
                 {
                     using (var cmd = new SqlCommand())
                     {
-                        StringBuilder sql = new StringBuilder("insert into system_user(");
+                        StringBuilder sql = new StringBuilder("insert into [dbo].[system_user](");
                         sql.Append(" creation_date,");
                         sql.Append(" user_name,");
                         sql.Append(" password");
@@ -61,12 +61,12 @@ namespace PumpingSystem.Domain.Repository
                     {
                         StringBuilder sql = new StringBuilder("select");
                         sql.Append(" user_name");
-                        sql.Append(" from system_user");
+                        sql.Append(" from [dbo].[system_user]");
                         sql.Append(" where user_name = @username");
                         sql.Append(" and password = @password");
 
                         cmd.Parameters.AddWithValue("@username", username);
-                        cmd.Parameters.AddWithValue("@username", password);
+                        cmd.Parameters.AddWithValue("@password", password);
 
                         cmd.Connection = conn;
                         cmd.CommandTimeout = timeout;

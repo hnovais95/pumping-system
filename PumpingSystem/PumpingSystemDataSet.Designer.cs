@@ -1243,7 +1243,7 @@ SELECT process_chart_id, creation_date, process_chart FROM process_chart WHERE (
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::PumpingSystem.Properties.Settings.Default.PumpingSystemConnectionString;
+            this._connection.ConnectionString = global::PumpingSystem.Properties.Settings.Default.PumpingSystemConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1565,7 +1565,7 @@ SELECT system_user_id, creation_date, user_name, password FROM [system_user] WHE
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.SqlClient.SqlConnection();
-            this._connection.ConnectionString = global::PumpingSystem.Properties.Settings.Default.PumpingSystemConnectionString;
+            this._connection.ConnectionString = global::PumpingSystem.Properties.Settings.Default.PumpingSystemConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

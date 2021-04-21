@@ -201,5 +201,10 @@ namespace PumpingSystem.Domain
         {
             return _RepositoryService.GetProcessChartByPeriod(startDate, endDate);
         }
+
+        public bool CheckIfItExistsByUsernameAndPassword(string username, string password)
+        {
+            return _RepositoryService.CheckIfItExistsByUsernameAndPassword(username, password);
+        }
     }
 }

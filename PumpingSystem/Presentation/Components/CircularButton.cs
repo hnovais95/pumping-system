@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace PumpingSystem.View
+namespace PumpingSystem.Presentation
 {
     class CircularButton : Button
     {

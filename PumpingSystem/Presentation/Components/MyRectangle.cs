@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace PumpingSystem.View
+namespace PumpingSystem.Presentation
 {
     internal class MyRectangle
     {

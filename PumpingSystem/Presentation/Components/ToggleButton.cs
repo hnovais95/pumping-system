@@ -3,7 +3,7 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
-namespace PumpingSystem.View
+namespace PumpingSystem.Presentation
 {
     public class ToggleButton : Control
     {

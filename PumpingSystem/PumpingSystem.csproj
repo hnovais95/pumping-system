@@ -67,10 +67,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Presentation\Forms\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Presentation\Forms\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="PumpingSystemDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PumpingSystemDataSet.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Shared\Data\ProcessChartData.cs" />
     <Compile Include="Driver\Uart\Modbus\ModbusSerialRTUMasterDriver.cs" />
@@ -82,11 +94,6 @@
     <Compile Include="Shared\Enums\OperationMode.cs" />
     <Compile Include="Shared\Enums\PumpStatus.cs" />
     <Compile Include="Shared\Utilities\Utilities.cs" />
-    <Compile Include="PumpingSystemDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PumpingSystemDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Domain\Repository\Handlers\AuthenticationRepository.cs" />
     <Compile Include="Domain\Repository\Contracts\IProcessChartRepository.cs" />
     <Compile Include="Domain\Repository\Handlers\ProcessChartRepository.cs" />
@@ -129,6 +136,9 @@
     <Compile Include="Presentation\Forms\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Presentation\Forms\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -147,6 +157,20 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="PumpingSystemDataSet.xsc">
+      <DependentUpon>PumpingSystemDataSet.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="PumpingSystemDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>PumpingSystemDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="PumpingSystemDataSet.xss">
+      <DependentUpon>PumpingSystemDataSet.xsd</DependentUpon>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -164,17 +188,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <None Include="PumpingSystemDataSet.xsc">
-      <DependentUpon>PumpingSystemDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="PumpingSystemDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>PumpingSystemDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="PumpingSystemDataSet.xss">
-      <DependentUpon>PumpingSystemDataSet.xsd</DependentUpon>
-    </None>
     <None Include="Presentation\Resources\Ico\PumpingSystem.ico" />
     <None Include="Presentation\Resources\Images\button_off.jpg" />
     <None Include="Presentation\Resources\Images\button_on.jpg" />
@@ -191,6 +204,7 @@
     <None Include="Presentation\Resources\Ico\Chart.png" />
     <None Include="Presentation\Resources\Ico\Check.gif" />
     <None Include="Presentation\Resources\Ico\Sync.gif" />
+    <None Include="Presentation\Resources\Images\avatar.png" />
     <Content Include="Presentation\Resources\Images\pump.png" />
     <Content Include="Presentation\Resources\Images\water_tank_level_0.png" />
     <Content Include="Presentation\Resources\Images\water_tank_level_10.png" />
