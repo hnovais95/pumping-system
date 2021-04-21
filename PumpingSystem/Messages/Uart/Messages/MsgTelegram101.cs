@@ -2,17 +2,17 @@
 {
     public class MsgTelegram101 : IMsgUart
     {
-        public MsgTelegram101(): this(0, 0) { }
+        public int MinLevelTank1 { get; set; }
+        public int MinLevelTank2 { get; set; }
 
-        public MsgTelegram101(int levelTank1, int levelTank2)
+        public MsgTelegram101() : this(0, 0) { }
+
+        public MsgTelegram101(int minLevelTank1, int minLevelTank2)
         {
-            this.LevelTank1 = levelTank1;
-            this.LevelTank2 = levelTank2;
+            this.MinLevelTank1 = minLevelTank1;
+            this.MinLevelTank2 = minLevelTank2;
         }
-
-        public int LevelTank1 { get; set; }
-        public int LevelTank2 { get; set; }
-
+        
         public int GetID()
         {
             return MsgUartExtension.GetID(this);

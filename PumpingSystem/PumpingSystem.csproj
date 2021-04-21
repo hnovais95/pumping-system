@@ -67,23 +67,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Data\ProcessChartData.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Shared\Data\ProcessChartData.cs" />
     <Compile Include="Driver\Uart\Modbus\ModbusSerialRTUMasterDriver.cs" />
-    <Compile Include="Messages\View\MsgChartData.cs" />
-    <Compile Include="Server\Repository\Contracts\IAuthenticationRepository.cs" />
-    <Compile Include="Server\Repository\Contracts\ILocalRepository.cs" />
-    <Compile Include="Common\Enums\EnumPosWaterTank.cs" />
-    <Compile Include="Common\Enums\EnumOperationMode.cs" />
-    <Compile Include="Common\Enums\EnumPumpStatus.cs" />
-    <Compile Include="Common\Utilities\Utilities.cs" />
+    <Compile Include="Messages\Uart\Messages\MsgTelegram201.cs" />
+    <Compile Include="Messages\Presentation\MsgChartData.cs" />
+    <Compile Include="Domain\Repository\Contracts\IAuthenticationRepository.cs" />
+    <Compile Include="Domain\Repository\Contracts\ILocalRepository.cs" />
+    <Compile Include="Shared\Enums\WaterTankPosition.cs" />
+    <Compile Include="Shared\Enums\OperationMode.cs" />
+    <Compile Include="Shared\Enums\PumpStatus.cs" />
+    <Compile Include="Shared\Utilities\Utilities.cs" />
     <Compile Include="PumpingSystemDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PumpingSystemDataSet.xsd</DependentUpon>
     </Compile>
-    <Compile Include="Server\Repository\Handlers\AuthenticationRepository.cs" />
-    <Compile Include="Server\Repository\Contracts\IProcessChartRepository.cs" />
-    <Compile Include="Server\Repository\Handlers\ProcessChartRepository.cs" />
+    <Compile Include="Domain\Repository\Handlers\AuthenticationRepository.cs" />
+    <Compile Include="Domain\Repository\Contracts\IProcessChartRepository.cs" />
+    <Compile Include="Domain\Repository\Handlers\ProcessChartRepository.cs" />
     <Compile Include="Driver\Uart\UartDriver.cs" />
     <Compile Include="Driver\Uart\UartHeader.cs" />
     <Compile Include="Driver\Uart\UartTelegram.cs" />
@@ -93,47 +99,42 @@
     <Compile Include="Messages\Uart\General\MsgUartHandlers.cs" />
     <Compile Include="Messages\Uart\General\MsgUartTypes.cs" />
     <Compile Include="Messages\Uart\Messages\MsgTelegram100.cs" />
-    <Compile Include="Messages\Uart\Messages\MsgTelegram101.cs" />
-    <Compile Include="Messages\Uart\Messages\MsgTelegram200.cs" />
     <Compile Include="Messages\Uart\Messages\MsgTelegram102.cs" />
-    <Compile Include="Messages\View\MsgPumpData.cs" />
-    <Compile Include="Messages\View\MsgWaterTankData.cs" />
+    <Compile Include="Messages\Uart\Messages\MsgTelegram200.cs" />
+    <Compile Include="Messages\Uart\Messages\MsgTelegram101.cs" />
+    <Compile Include="Messages\Presentation\MsgPumpData.cs" />
+    <Compile Include="Messages\Presentation\MsgWaterTankData.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Server\Services\RepositoryService.cs" />
-    <Compile Include="Server\Services\UartService.cs" />
-    <Compile Include="Server\Services\ApplicationService.cs" />
-    <Compile Include="Server\Entities\Pump.cs" />
-    <Compile Include="Server\Entities\WaterTank.cs" />
-    <Compile Include="Server\Repository\Handlers\LocalRepository.cs" />
-    <Compile Include="Server\Telegrams\TreatTelegram100.cs" />
-    <Compile Include="Server\Telegrams\TreatTelegram101.cs" />
-    <Compile Include="Server\Telegrams\TreatTelegram102.cs" />
-    <Compile Include="View\Components\CircularButton.cs">
+    <Compile Include="Domain\Services\RepositoryService.cs" />
+    <Compile Include="Domain\Services\UartService.cs" />
+    <Compile Include="Domain\Services\ApplicationService.cs" />
+    <Compile Include="Domain\Entities\Pump.cs" />
+    <Compile Include="Domain\Entities\WaterTank.cs" />
+    <Compile Include="Domain\Repository\Handlers\LocalRepository.cs" />
+    <Compile Include="Domain\Telegrams\TreatTelegram100.cs" />
+    <Compile Include="Domain\Telegrams\TreatTelegram102.cs" />
+    <Compile Include="Domain\Telegrams\TreatTelegram101.cs" />
+    <Compile Include="Presentation\Components\CircularButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="View\Components\ExtensionMethods.cs" />
-    <Compile Include="View\Components\MyRectangle.cs" />
-    <Compile Include="View\Components\ToggleButton.cs">
+    <Compile Include="Presentation\Components\ExtensionMethods.cs" />
+    <Compile Include="Presentation\Components\MyRectangle.cs" />
+    <Compile Include="Presentation\Components\ToggleButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="View\Forms\frmMain.cs">
+    <Compile Include="Presentation\Forms\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Forms\frmMain.Designer.cs">
+    <Compile Include="Presentation\Forms\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <EmbeddedResource Include="View\Forms\frmMain.resx">
+    <EmbeddedResource Include="Presentation\Forms\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -174,31 +175,34 @@
     <None Include="PumpingSystemDataSet.xss">
       <DependentUpon>PumpingSystemDataSet.xsd</DependentUpon>
     </None>
-    <None Include="View\Resources\Ico\PumpingSystem.ico" />
-    <None Include="View\Resources\Images\button_off.jpg" />
-    <None Include="View\Resources\Images\button_on.jpg" />
-    <None Include="View\Resources\Images\led_off.png" />
-    <None Include="View\Resources\Images\led_on.png" />
-    <Content Include="Databases\PumpingSystem.mdf">
+    <None Include="Presentation\Resources\Ico\PumpingSystem.ico" />
+    <None Include="Presentation\Resources\Images\button_off.jpg" />
+    <None Include="Presentation\Resources\Images\button_on.jpg" />
+    <None Include="Presentation\Resources\Images\led_off.png" />
+    <None Include="Presentation\Resources\Images\led_on.png" />
+    <Content Include="Infra\Databases\PumpingSystem.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Databases\PumpingSystem_log.ldf">
+    <Content Include="Infra\Databases\PumpingSystem_log.ldf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>PumpingSystem.mdf</DependentUpon>
     </Content>
-    <None Include="View\Resources\Ico\Refresh.gif" />
-    <Content Include="View\Resources\Images\pump.png" />
-    <Content Include="View\Resources\Images\water_tank_level_0.png" />
-    <Content Include="View\Resources\Images\water_tank_level_10.png" />
-    <Content Include="View\Resources\Images\water_tank_level_100.png" />
-    <Content Include="View\Resources\Images\water_tank_level_20.png" />
-    <Content Include="View\Resources\Images\water_tank_level_30.png" />
-    <Content Include="View\Resources\Images\water_tank_level_40.png" />
-    <Content Include="View\Resources\Images\water_tank_level_50.png" />
-    <Content Include="View\Resources\Images\water_tank_level_60.png" />
-    <Content Include="View\Resources\Images\water_tank_level_70.png" />
-    <Content Include="View\Resources\Images\water_tank_level_80.png" />
-    <Content Include="View\Resources\Images\water_tank_level_90.png" />
+    <None Include="Presentation\Resources\Ico\Refresh.gif" />
+    <None Include="Presentation\Resources\Ico\Chart.png" />
+    <None Include="Presentation\Resources\Ico\Check.gif" />
+    <None Include="Presentation\Resources\Ico\Sync.gif" />
+    <Content Include="Presentation\Resources\Images\pump.png" />
+    <Content Include="Presentation\Resources\Images\water_tank_level_0.png" />
+    <Content Include="Presentation\Resources\Images\water_tank_level_10.png" />
+    <Content Include="Presentation\Resources\Images\water_tank_level_100.png" />
+    <Content Include="Presentation\Resources\Images\water_tank_level_20.png" />
+    <Content Include="Presentation\Resources\Images\water_tank_level_30.png" />
+    <Content Include="Presentation\Resources\Images\water_tank_level_40.png" />
+    <Content Include="Presentation\Resources\Images\water_tank_level_50.png" />
+    <Content Include="Presentation\Resources\Images\water_tank_level_60.png" />
+    <Content Include="Presentation\Resources\Images\water_tank_level_70.png" />
+    <Content Include="Presentation\Resources\Images\water_tank_level_80.png" />
+    <Content Include="Presentation\Resources\Images\water_tank_level_90.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

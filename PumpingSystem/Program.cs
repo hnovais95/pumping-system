@@ -4,8 +4,8 @@ using System.IO.Ports;
 using PumpingSystem.Driver.Uart;
 using PumpingSystem.Driver.Uart.Modbus;
 using PumpingSystem.View;
-using PumpingSystem.Server;
-using PumpingSystem.Server.Repository;
+using PumpingSystem.Domain;
+using PumpingSystem.Domain.Repository;
 
 namespace PumpingSystem
 {

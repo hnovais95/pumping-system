@@ -16,7 +16,7 @@ namespace PumpingSystem.Driver.Uart.Modbus
         private ModbusSerialMaster _Master;
         private ushort[] _Registers;
 
-        private enum EnumRegisterType
+        private enum RegisterTypeByPosition
         {
             PumpStatus = 0,
             OperationMode = 1,
@@ -58,7 +58,7 @@ namespace PumpingSystem.Driver.Uart.Modbus
                         {
                             if (registers[i] != _Registers[i])
                             {
-                                IMsgUart msg = CreateMsg((EnumRegisterType)i, registers);
+                                IMsgUart msg = CreateMsg((RegisterTypeByPosition)i, registers);
                                 if (msg != null)
                                 {
                                     Program.UartService.TreatMessage(msg);
@@ -98,37 +98,36 @@ namespace PumpingSystem.Driver.Uart.Modbus
             }
             catch (Exception e)
             {
-
             }
         }
 
-        private IMsgUart CreateMsg(EnumRegisterType registerType, ushort[] registers)
+        private IMsgUart CreateMsg(RegisterTypeByPosition registerType, ushort[] registers)
         {
             IMsgUart msg = null;
             switch (registerType)
             {
-                case EnumRegisterType.PumpStatus:
-                case EnumRegisterType.OperationMode:
+                case RegisterTypeByPosition.PumpStatus:
+                case RegisterTypeByPosition.OperationMode:
 
-                    int pumpStauts = registers[(int)EnumRegisterType.PumpStatus];
-                    int operationMode = registers[(int)EnumRegisterType.OperationMode];                    
+                    int pumpStauts = registers[(int)RegisterTypeByPosition.PumpStatus];
+                    int operationMode = registers[(int)RegisterTypeByPosition.OperationMode];                    
                     msg = new MsgTelegram100(pumpStauts, operationMode);
 
                     break;
-                case EnumRegisterType.MinWaterTankLevel1:
-                case EnumRegisterType.MinWaterTankLevel2:
+                case RegisterTypeByPosition.MinWaterTankLevel1:
+                case RegisterTypeByPosition.MinWaterTankLevel2:
 
-                    int minWaterTankLevel1 = registers[(int)EnumRegisterType.MinWaterTankLevel1];
-                    int minWaterTankLevel2 = registers[(int)EnumRegisterType.MinWaterTankLevel2];
-                    msg = new MsgTelegram102(minWaterTankLevel1, minWaterTankLevel2);
+                    int minWaterTankLevel1 = registers[(int)RegisterTypeByPosition.MinWaterTankLevel1];
+                    int minWaterTankLevel2 = registers[(int)RegisterTypeByPosition.MinWaterTankLevel2];
+                    msg = new MsgTelegram101(minWaterTankLevel1, minWaterTankLevel2);
 
                     break;
-                case EnumRegisterType.WaterTankLevel1:
-                case EnumRegisterType.WaterTankLevel2:
+                case RegisterTypeByPosition.WaterTankLevel1:
+                case RegisterTypeByPosition.WaterTankLevel2:
 
-                    int waterTankLevel1 = registers[(int)EnumRegisterType.WaterTankLevel1];
-                    int waterTankLevel2 = registers[(int)EnumRegisterType.WaterTankLevel2];
-                    msg = new MsgTelegram101(waterTankLevel1, waterTankLevel2);
+                    int waterTankLevel1 = registers[(int)RegisterTypeByPosition.WaterTankLevel1];
+                    int waterTankLevel2 = registers[(int)RegisterTypeByPosition.WaterTankLevel2];
+                    msg = new MsgTelegram102(waterTankLevel1, waterTankLevel2);
 
                     break;
             }
