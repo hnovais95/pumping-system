@@ -47,9 +47,10 @@ namespace PumpingSystem.Presentation
             this.picAvatar.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.picAvatar.Image = global::PumpingSystem.Properties.Resources.avatar;
-            this.picAvatar.Location = new System.Drawing.Point(96, 12);
+            this.picAvatar.Location = new System.Drawing.Point(72, 10);
+            this.picAvatar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.picAvatar.Name = "picAvatar";
-            this.picAvatar.Size = new System.Drawing.Size(209, 175);
+            this.picAvatar.Size = new System.Drawing.Size(157, 142);
             this.picAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picAvatar.TabIndex = 0;
             this.picAvatar.TabStop = false;
@@ -59,7 +60,8 @@ namespace PumpingSystem.Presentation
             this.lblUsername.AutoSize = true;
             this.lblUsername.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUsername.ForeColor = System.Drawing.Color.Silver;
-            this.lblUsername.Location = new System.Drawing.Point(24, 214);
+            this.lblUsername.Location = new System.Drawing.Point(18, 174);
+            this.lblUsername.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUsername.Name = "lblUsername";
             this.lblUsername.Size = new System.Drawing.Size(101, 25);
             this.lblUsername.TabIndex = 1;
@@ -70,9 +72,10 @@ namespace PumpingSystem.Presentation
             this.txtUsername.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtUsername.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtUsername.ForeColor = System.Drawing.Color.Black;
-            this.txtUsername.Location = new System.Drawing.Point(29, 256);
+            this.txtUsername.Location = new System.Drawing.Point(22, 208);
+            this.txtUsername.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtUsername.Name = "txtUsername";
-            this.txtUsername.Size = new System.Drawing.Size(344, 22);
+            this.txtUsername.Size = new System.Drawing.Size(258, 22);
             this.txtUsername.TabIndex = 1;
             // 
             // btnLogin
@@ -82,9 +85,10 @@ namespace PumpingSystem.Presentation
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogin.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLogin.ForeColor = System.Drawing.Color.White;
-            this.btnLogin.Location = new System.Drawing.Point(29, 412);
+            this.btnLogin.Location = new System.Drawing.Point(22, 335);
+            this.btnLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLogin.Name = "btnLogin";
-            this.btnLogin.Size = new System.Drawing.Size(344, 45);
+            this.btnLogin.Size = new System.Drawing.Size(258, 37);
             this.btnLogin.TabIndex = 3;
             this.btnLogin.Text = "Login";
             this.btnLogin.UseVisualStyleBackColor = false;
@@ -93,9 +97,10 @@ namespace PumpingSystem.Presentation
             // pnlUsername
             // 
             this.pnlUsername.BackColor = System.Drawing.Color.Silver;
-            this.pnlUsername.Location = new System.Drawing.Point(29, 284);
+            this.pnlUsername.Location = new System.Drawing.Point(22, 231);
+            this.pnlUsername.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlUsername.Name = "pnlUsername";
-            this.pnlUsername.Size = new System.Drawing.Size(344, 1);
+            this.pnlUsername.Size = new System.Drawing.Size(258, 1);
             this.pnlUsername.TabIndex = 4;
             // 
             // lblPassword
@@ -103,7 +108,8 @@ namespace PumpingSystem.Presentation
             this.lblPassword.AutoSize = true;
             this.lblPassword.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblPassword.ForeColor = System.Drawing.Color.Silver;
-            this.lblPassword.Location = new System.Drawing.Point(24, 311);
+            this.lblPassword.Location = new System.Drawing.Point(18, 253);
+            this.lblPassword.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblPassword.Name = "lblPassword";
             this.lblPassword.Size = new System.Drawing.Size(97, 25);
             this.lblPassword.TabIndex = 1;
@@ -114,18 +120,20 @@ namespace PumpingSystem.Presentation
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtPassword.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtPassword.ForeColor = System.Drawing.Color.Black;
-            this.txtPassword.Location = new System.Drawing.Point(29, 352);
+            this.txtPassword.Location = new System.Drawing.Point(22, 286);
+            this.txtPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(344, 22);
+            this.txtPassword.Size = new System.Drawing.Size(258, 22);
             this.txtPassword.TabIndex = 2;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
             // pnlPassword
             // 
             this.pnlPassword.BackColor = System.Drawing.Color.Silver;
-            this.pnlPassword.Location = new System.Drawing.Point(30, 380);
+            this.pnlPassword.Location = new System.Drawing.Point(22, 309);
+            this.pnlPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pnlPassword.Name = "pnlPassword";
-            this.pnlPassword.Size = new System.Drawing.Size(344, 1);
+            this.pnlPassword.Size = new System.Drawing.Size(258, 1);
             this.pnlPassword.TabIndex = 4;
             // 
             // btnExit
@@ -135,21 +143,22 @@ namespace PumpingSystem.Presentation
             this.btnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExit.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExit.ForeColor = System.Drawing.Color.White;
-            this.btnExit.Location = new System.Drawing.Point(29, 485);
+            this.btnExit.Location = new System.Drawing.Point(22, 394);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(344, 45);
-            this.btnExit.TabIndex = 3;
+            this.btnExit.Size = new System.Drawing.Size(258, 37);
+            this.btnExit.TabIndex = 4;
             this.btnExit.Text = "Cancel";
             this.btnExit.UseVisualStyleBackColor = false;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // frmLogin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(402, 560);
+            this.ClientSize = new System.Drawing.Size(302, 455);
             this.Controls.Add(this.pnlPassword);
             this.Controls.Add(this.pnlUsername);
             this.Controls.Add(this.btnExit);
@@ -161,6 +170,7 @@ namespace PumpingSystem.Presentation
             this.Controls.Add(this.picAvatar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmLogin";
